@@ -19,7 +19,7 @@ The project uses a Conda environment named `weather_env`.
 ```bash
 conda create -n weather_env python=3.9
 conda activate weather_env
-pip install numpy pandas matplotlib scikit-learn hmmlearn tqdm jupyter ipykernel
+pip install -r requirements.txt
 ```
 
 If additional packages are required by the project:
@@ -312,3 +312,5 @@ on a deterministic rainfall threshold.
 
 The HMM is intended to capture the **temporal/stochastic behavior of weather**
 and provide a probability of the umbrella being in the OPEN state.
+
+Currently, the prototype only considers water drop/raining condition, future development, we will cover the temperature effect that triggers the umbrella to be open and further performance improvement.

@@ -1,0 +1,83 @@
+2026-08-09 18:31:57,849 | INFO | Starting HMM walk-forward experiment
+2026-08-09 18:31:59,432 | INFO | Total observations: 316,838
+2026-08-09 18:31:59,433 | INFO | Total days: 221
+2026-08-09 18:31:59,434 | INFO | Total folds: 44
+2026-08-09 18:31:59,434 | INFO | N_STATES=5, INITIAL_TRAIN_DAYS=5, TRAIN_INTERVAL_DAYS=5, HORIZON=5, N_ITER=50
+2026-08-09 18:31:59,437 | INFO | Fold 1/44 | Train: 2026-01-01→2026-01-05 | Eval: 2026-01-06
+2026-08-09 18:31:59,450 | INFO | Training rows: 7,198 | Evaluation rows: 1,440
+2026-08-09 18:32:01,567 | INFO | HMM trained | iterations=38 | converged=True
+2026-08-09 18:32:01,579 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:32:01,629 | INFO | Fold 1 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:01,630 | INFO | Fold 2/44 | Train: 2026-01-01→2026-01-10 | Eval: 2026-01-11
+2026-08-09 18:32:01,644 | INFO | Training rows: 14,398 | Evaluation rows: 1,440
+2026-08-09 18:32:02,447 | WARNING | Model is not converging.  Current: 94728.33821164504 is not greater than 94728.34151925877. Delta is -0.003307613733340986
+2026-08-09 18:32:02,449 | INFO | HMM trained | iterations=24 | converged=True
+2026-08-09 18:32:02,464 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:32:02,510 | INFO | Fold 2 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:02,511 | INFO | Fold 3/44 | Train: 2026-01-01→2026-01-15 | Eval: 2026-01-16
+2026-08-09 18:32:02,525 | INFO | Training rows: 21,597 | Evaluation rows: 1,440
+2026-08-09 18:32:03,765 | INFO | HMM trained | iterations=24 | converged=True
+2026-08-09 18:32:03,789 | INFO | State rain scores: [0.0000e+00 0.0000e+00 5.5443e-04 0.0000e+00 6.7733e-01]
+2026-08-09 18:32:03,835 | INFO | Fold 3 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:03,837 | INFO | Fold 4/44 | Train: 2026-01-01→2026-01-20 | Eval: 2026-01-21
+2026-08-09 18:32:03,851 | INFO | Training rows: 28,797 | Evaluation rows: 1,440
+2026-08-09 18:32:05,749 | INFO | HMM trained | iterations=32 | converged=True
+2026-08-09 18:32:05,778 | INFO | State rain scores: [0.0000e+00 0.0000e+00 4.5196e-04 0.0000e+00 6.7733e-01]
+2026-08-09 18:32:05,829 | INFO | Fold 4 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:05,831 | INFO | Fold 5/44 | Train: 2026-01-01→2026-01-25 | Eval: 2026-01-26
+2026-08-09 18:32:05,848 | INFO | Training rows: 35,996 | Evaluation rows: 1,440
+2026-08-09 18:32:08,448 | INFO | HMM trained | iterations=36 | converged=True
+2026-08-09 18:32:08,485 | INFO | State rain scores: [0.0000e+00 0.0000e+00 3.2130e-04 0.0000e+00 6.7733e-01]
+2026-08-09 18:32:08,532 | INFO | Fold 5 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:08,533 | INFO | Fold 6/44 | Train: 2026-01-01→2026-01-30 | Eval: 2026-01-31
+2026-08-09 18:32:08,549 | INFO | Training rows: 43,196 | Evaluation rows: 1,440
+2026-08-09 18:32:12,930 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:32:12,974 | INFO | State rain scores: [0.     0.     0.     0.0034 0.6773]
+2026-08-09 18:32:13,020 | INFO | Fold 6 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:13,021 | INFO | Fold 7/44 | Train: 2026-01-01→2026-02-04 | Eval: 2026-02-05
+2026-08-09 18:32:13,037 | INFO | Training rows: 50,395 | Evaluation rows: 1,439
+2026-08-09 18:32:16,114 | INFO | HMM trained | iterations=30 | converged=True
+2026-08-09 18:32:16,171 | INFO | State rain scores: [0.     0.     0.     0.0031 0.6773]
+2026-08-09 18:32:16,219 | INFO | Fold 7 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:16,221 | INFO | Fold 8/44 | Train: 2026-01-01→2026-02-09 | Eval: 2026-02-10
+2026-08-09 18:32:16,239 | INFO | Training rows: 57,594 | Evaluation rows: 1,440
+2026-08-09 18:32:22,009 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:32:22,073 | INFO | State rain scores: [5.6634e-04 0.0000e+00 0.0000e+00 3.3293e-03 6.1190e-01]
+2026-08-09 18:32:22,120 | INFO | Fold 8 metrics | Brier=0.0280 | ROC-AUC=0.9591 | PR-AUC=0.6417 | F1=0.7722
+2026-08-09 18:32:22,121 | INFO | Fold 9/44 | Train: 2026-01-01→2026-02-14 | Eval: 2026-02-15
+2026-08-09 18:32:22,140 | INFO | Training rows: 64,794 | Evaluation rows: 1,440
+2026-08-09 18:32:28,608 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:32:28,675 | INFO | State rain scores: [4.0876e-04 4.6751e-04 1.3631e-04 3.5777e-03 6.0748e-01]
+2026-08-09 18:32:28,721 | INFO | Fold 9 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:28,723 | INFO | Fold 10/44 | Train: 2026-01-01→2026-02-19 | Eval: 2026-02-20
+2026-08-09 18:32:28,740 | INFO | Training rows: 71,992 | Evaluation rows: 1,440
+2026-08-09 18:32:36,043 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:32:36,122 | INFO | State rain scores: [5.1722e-04 3.7576e-04 8.6908e-05 3.0499e-03 5.3313e-01]
+2026-08-09 18:32:36,168 | INFO | Fold 10 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:36,170 | INFO | Fold 11/44 | Train: 2026-01-01→2026-02-24 | Eval: 2026-02-25
+2026-08-09 18:32:36,189 | INFO | Training rows: 79,192 | Evaluation rows: 1,439
+2026-08-09 18:32:44,514 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:32:44,600 | INFO | State rain scores: [7.6800e-04 4.2887e-04 2.0731e-04 0.0000e+00 8.4735e-01]
+2026-08-09 18:32:44,648 | INFO | Fold 11 metrics | Brier=0.0046 | ROC-AUC=0.9660 | PR-AUC=0.7707 | F1=0.8732
+2026-08-09 18:32:44,650 | INFO | Fold 12/44 | Train: 2026-01-01→2026-03-01 | Eval: 2026-03-02
+2026-08-09 18:32:44,672 | INFO | Training rows: 86,390 | Evaluation rows: 1,440
+2026-08-09 18:32:49,582 | INFO | HMM trained | iterations=25 | converged=True
+2026-08-09 18:32:49,666 | INFO | State rain scores: [8.0450e-04 2.7664e-04 1.1812e-04 0.0000e+00 8.7758e-01]
+2026-08-09 18:32:49,715 | INFO | Fold 12 metrics | Brier=0.0293 | ROC-AUC=0.9448 | PR-AUC=0.9523 | F1=0.9738
+2026-08-09 18:32:49,717 | INFO | Fold 13/44 | Train: 2026-01-01→2026-03-06 | Eval: 2026-03-07
+2026-08-09 18:32:49,737 | INFO | Training rows: 93,590 | Evaluation rows: 1,440
+2026-08-09 18:32:54,662 | INFO | HMM trained | iterations=23 | converged=True
+2026-08-09 18:32:54,751 | INFO | State rain scores: [1.4087e-03 2.6843e-04 0.0000e+00 0.0000e+00 8.7811e-01]
+2026-08-09 18:32:54,797 | INFO | Fold 13 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:32:54,799 | INFO | Fold 14/44 | Train: 2026-01-01→2026-03-11 | Eval: 2026-03-12
+2026-08-09 18:32:54,819 | INFO | Training rows: 100,789 | Evaluation rows: 1,440
+2026-08-09 18:33:04,828 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:33:04,923 | INFO | State rain scores: [1.2574e-03 2.4162e-04 0.0000e+00 0.0000e+00 8.7811e-01]
+2026-08-09 18:33:04,970 | INFO | Fold 14 metrics | Brier=0.0186 | ROC-AUC=0.9637 | PR-AUC=0.5974 | F1=0.7376
+2026-08-09 18:33:04,972 | INFO | Fold 15/44 | Train: 2026-01-01→2026-03-16 | Eval: 2026-03-17
+2026-08-09 18:33:04,992 | INFO | Training rows: 107,989 | Evaluation rows: 1,440
+2026-08-09 18:33:15,682 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:33:15,783 | INFO | State rain scores: [1.5052e-03 2.1606e-04 0.0000e+00 6.1150e-04 8.4903e-01]
+2026-08-09 18:33:15,828 | INFO | Fold 15 metrics | Brier=0.0000 | ROC-AUC=0.0000 | PR-AUC=0.0000 | F1=0.0000
+2026-08-09 18:33:15,829 | INFO | Fold 16/44 | Train: 2026-01-01→2026-03-21 | Eval: 2026-03-22
+2026-08-09 18:33:15,851 | INFO | Training rows: 115,188 | Evaluation rows: 1,440

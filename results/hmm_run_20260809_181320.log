@@ -1,0 +1,99 @@
+2026-08-09 18:13:20,711 | INFO | Starting HMM walk-forward experiment
+2026-08-09 18:13:26,087 | INFO | Total observations: 316,838
+2026-08-09 18:13:26,087 | INFO | Total days: 221
+2026-08-09 18:13:26,088 | INFO | Total folds: 44
+2026-08-09 18:13:26,089 | INFO | N_STATES=5, INITIAL_TRAIN_DAYS=5, TRAIN_INTERVAL_DAYS=5, HORIZON=5, N_ITER=50
+2026-08-09 18:13:26,092 | INFO | Fold 1/44 | Train: 2026-01-01→2026-01-05 | Eval: 2026-01-06
+2026-08-09 18:13:26,097 | INFO | Training rows: 7,198 | Evaluation rows: 1,440
+2026-08-09 18:13:28,464 | INFO | HMM trained | iterations=30 | converged=True
+2026-08-09 18:13:28,477 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:28,527 | INFO | Fold 1 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:28,529 | INFO | Fold 2/44 | Train: 2026-01-01→2026-01-10 | Eval: 2026-01-11
+2026-08-09 18:13:28,535 | INFO | Training rows: 14,398 | Evaluation rows: 1,440
+2026-08-09 18:13:29,339 | INFO | HMM trained | iterations=30 | converged=True
+2026-08-09 18:13:29,353 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:29,397 | INFO | Fold 2 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:29,399 | INFO | Fold 3/44 | Train: 2026-01-01→2026-01-15 | Eval: 2026-01-16
+2026-08-09 18:13:29,405 | INFO | Training rows: 21,597 | Evaluation rows: 1,440
+2026-08-09 18:13:30,811 | INFO | HMM trained | iterations=35 | converged=True
+2026-08-09 18:13:30,829 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:30,873 | INFO | Fold 3 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:30,875 | INFO | Fold 4/44 | Train: 2026-01-01→2026-01-20 | Eval: 2026-01-21
+2026-08-09 18:13:30,882 | INFO | Training rows: 28,797 | Evaluation rows: 1,440
+2026-08-09 18:13:32,934 | INFO | HMM trained | iterations=38 | converged=True
+2026-08-09 18:13:32,961 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:33,005 | INFO | Fold 4 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:33,007 | INFO | Fold 5/44 | Train: 2026-01-01→2026-01-25 | Eval: 2026-01-26
+2026-08-09 18:13:33,015 | INFO | Training rows: 35,996 | Evaluation rows: 1,440
+2026-08-09 18:13:35,315 | INFO | HMM trained | iterations=34 | converged=True
+2026-08-09 18:13:35,346 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:35,390 | INFO | Fold 5 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:35,392 | INFO | Fold 6/44 | Train: 2026-01-01→2026-01-30 | Eval: 2026-01-31
+2026-08-09 18:13:35,400 | INFO | Training rows: 43,196 | Evaluation rows: 1,440
+2026-08-09 18:13:39,427 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:13:39,462 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:39,504 | INFO | Fold 6 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:39,506 | INFO | Fold 7/44 | Train: 2026-01-01→2026-02-04 | Eval: 2026-02-05
+2026-08-09 18:13:39,514 | INFO | Training rows: 50,395 | Evaluation rows: 1,439
+2026-08-09 18:13:41,676 | INFO | HMM trained | iterations=23 | converged=True
+2026-08-09 18:13:41,718 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:41,761 | INFO | Fold 7 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:41,763 | INFO | Fold 8/44 | Train: 2026-01-01→2026-02-09 | Eval: 2026-02-10
+2026-08-09 18:13:41,772 | INFO | Training rows: 57,594 | Evaluation rows: 1,440
+2026-08-09 18:13:43,935 | WARNING | Model is not converging.  Current: 468051.973836709 is not greater than 468051.9740513504. Delta is -0.0002146413899026811
+2026-08-09 18:13:43,937 | INFO | HMM trained | iterations=20 | converged=True
+2026-08-09 18:13:43,991 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:44,034 | INFO | Fold 8 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:44,036 | INFO | Fold 9/44 | Train: 2026-01-01→2026-02-14 | Eval: 2026-02-15
+2026-08-09 18:13:44,046 | INFO | Training rows: 64,794 | Evaluation rows: 1,440
+2026-08-09 18:13:46,487 | WARNING | Model is not converging.  Current: 533169.2396900582 is not greater than 533169.2506348205. Delta is -0.010944762383587658
+2026-08-09 18:13:46,490 | INFO | HMM trained | iterations=20 | converged=True
+2026-08-09 18:13:46,543 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:46,586 | INFO | Fold 9 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:46,588 | INFO | Fold 10/44 | Train: 2026-01-01→2026-02-19 | Eval: 2026-02-20
+2026-08-09 18:13:46,598 | INFO | Training rows: 71,992 | Evaluation rows: 1,440
+2026-08-09 18:13:50,657 | INFO | HMM trained | iterations=30 | converged=True
+2026-08-09 18:13:50,716 | INFO | State rain scores: [0. 0. 0. 0. 0.]
+2026-08-09 18:13:50,759 | INFO | Fold 10 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:50,761 | INFO | Fold 11/44 | Train: 2026-01-01→2026-02-24 | Eval: 2026-02-25
+2026-08-09 18:13:50,772 | INFO | Training rows: 79,192 | Evaluation rows: 1,439
+2026-08-09 18:13:58,537 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:13:58,608 | INFO | State rain scores: [0.0231 0.     0.     0.     0.0924]
+2026-08-09 18:13:58,656 | INFO | Fold 11 metrics | Brier=0.0003 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:13:58,657 | INFO | Fold 12/44 | Train: 2026-01-01→2026-03-01 | Eval: 2026-03-02
+2026-08-09 18:13:58,669 | INFO | Training rows: 86,390 | Evaluation rows: 1,440
+2026-08-09 18:14:04,572 | INFO | HMM trained | iterations=27 | converged=True
+2026-08-09 18:14:04,644 | INFO | State rain scores: [0.0208 0.     0.     0.     0.0834]
+2026-08-09 18:14:04,689 | INFO | Fold 12 metrics | Brier=0.0136 | ROC-AUC=0.6604 | PR-AUC=0.0061 | F1=0.0000
+2026-08-09 18:14:04,691 | INFO | Fold 13/44 | Train: 2026-01-01→2026-03-06 | Eval: 2026-03-07
+2026-08-09 18:14:04,702 | INFO | Training rows: 93,590 | Evaluation rows: 1,440
+2026-08-09 18:14:12,861 | INFO | HMM trained | iterations=45 | converged=True
+2026-08-09 18:14:12,945 | INFO | State rain scores: [1.9630e-02 5.8432e-05 5.7902e-05 0.0000e+00 7.8405e-02]
+2026-08-09 18:14:12,990 | INFO | Fold 13 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:14:12,992 | INFO | Fold 14/44 | Train: 2026-01-01→2026-03-11 | Eval: 2026-03-12
+2026-08-09 18:14:13,005 | INFO | Training rows: 100,789 | Evaluation rows: 1,440
+2026-08-09 18:14:20,932 | INFO | HMM trained | iterations=41 | converged=True
+2026-08-09 18:14:21,028 | INFO | State rain scores: [1.9628e-02 5.2687e-05 5.3794e-05 0.0000e+00 7.8405e-02]
+2026-08-09 18:14:21,073 | INFO | Fold 14 metrics | Brier=0.0004 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:14:21,074 | INFO | Fold 15/44 | Train: 2026-01-01→2026-03-16 | Eval: 2026-03-17
+2026-08-09 18:14:21,088 | INFO | Training rows: 107,989 | Evaluation rows: 1,440
+2026-08-09 18:14:28,286 | INFO | HMM trained | iterations=33 | converged=True
+2026-08-09 18:14:28,384 | INFO | State rain scores: [1.8387e-02 5.0091e-05 7.1857e-05 0.0000e+00 7.3428e-02]
+2026-08-09 18:14:28,430 | INFO | Fold 15 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:14:28,432 | INFO | Fold 16/44 | Train: 2026-01-01→2026-03-21 | Eval: 2026-03-22
+2026-08-09 18:14:28,448 | INFO | Training rows: 115,188 | Evaluation rows: 1,440
+2026-08-09 18:14:40,063 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:14:40,190 | INFO | State rain scores: [1.6661e-02 4.3529e-05 6.8475e-05 0.0000e+00 6.6530e-02]
+2026-08-09 18:14:40,236 | INFO | Fold 16 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:14:40,238 | INFO | Fold 17/44 | Train: 2026-01-01→2026-03-26 | Eval: 2026-03-27
+2026-08-09 18:14:40,252 | INFO | Training rows: 122,388 | Evaluation rows: 1,440
+2026-08-09 18:14:52,511 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:14:52,631 | INFO | State rain scores: [1.6012e-02 4.4501e-05 6.1811e-05 0.0000e+00 6.3943e-02]
+2026-08-09 18:14:52,678 | INFO | Fold 17 metrics | Brier=0.0000 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:14:52,680 | INFO | Fold 18/44 | Train: 2026-01-01→2026-03-31 | Eval: 2026-04-01
+2026-08-09 18:14:52,699 | INFO | Training rows: 129,588 | Evaluation rows: 1,439
+2026-08-09 18:15:05,892 | INFO | HMM trained | iterations=50 | converged=True
+2026-08-09 18:15:06,021 | INFO | State rain scores: [1.8623e-02 1.3009e-04 6.7858e-05 0.0000e+00 7.4293e-02]
+2026-08-09 18:15:06,066 | INFO | Fold 18 metrics | Brier=0.0003 | ROC-AUC=nan | PR-AUC=nan | F1=0.0000
+2026-08-09 18:15:06,068 | INFO | Fold 19/44 | Train: 2026-01-01→2026-04-05 | Eval: 2026-04-06
+2026-08-09 18:15:06,084 | INFO | Training rows: 136,787 | Evaluation rows: 1,440

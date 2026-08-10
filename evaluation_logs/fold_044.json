@@ -1,0 +1,2138 @@
+{
+  "fold": 44,
+  "training": {
+    "start": "2026-01-01 00:00:00",
+    "end": "2026-08-08 00:00:00"
+  },
+  "evaluation": {
+    "start": "2026-08-09 00:00:00",
+    "end": "2026-08-09 00:59:00"
+  },
+  "metrics": [
+    {
+      "Brier": 0.0,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 1,
+      "Eval_Date": "2026-01-06T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-05T00:00:00",
+      "N_Train_Rows": 7198,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.0,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 2,
+      "Eval_Date": "2026-01-11T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-10T00:00:00",
+      "N_Train_Rows": 14398,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 1.9191729627708303e-07,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 3,
+      "Eval_Date": "2026-01-16T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-15T00:00:00",
+      "N_Train_Rows": 21597,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 2.042717251529275e-07,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 4,
+      "Eval_Date": "2026-01-21T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-20T00:00:00",
+      "N_Train_Rows": 28797,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 7.713104188120545e-08,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 5,
+      "Eval_Date": "2026-01-26T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-25T00:00:00",
+      "N_Train_Rows": 35996,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 8.868788681480794e-28,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 6,
+      "Eval_Date": "2026-01-31T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-01-30T00:00:00",
+      "N_Train_Rows": 43196,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 5.148244412757194e-07,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 7,
+      "Eval_Date": "2026-02-05T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-02-04T00:00:00",
+      "N_Train_Rows": 50395,
+      "N_Eval_Rows": 1438
+    },
+    {
+      "Brier": 0.02802175923364506,
+      "Correlation": 0.781662569243784,
+      "ROC_AUC": 0.959139534883721,
+      "PR_AUC": 0.6417220586735267,
+      "Accuracy": 0.9430555555555555,
+      "Precision": 0.6619047619047619,
+      "Recall": 0.9266666666666666,
+      "F1": 0.7722222222222223,
+      "Closed_Accuracy": 0.9449612403100776,
+      "Fold": 8,
+      "Eval_Date": "2026-02-10T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-02-09T00:00:00",
+      "N_Train_Rows": 57594,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 8.064533446335225e-07,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 9,
+      "Eval_Date": "2026-02-15T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-02-14T00:00:00",
+      "N_Train_Rows": 64794,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 2.0387316283077785e-07,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 10,
+      "Eval_Date": "2026-02-20T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-02-19T00:00:00",
+      "N_Train_Rows": 71992,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.004635802890006554,
+      "Correlation": 0.8859291840073655,
+      "ROC_AUC": 0.9660161806543385,
+      "PR_AUC": 0.7707279455061291,
+      "Accuracy": 0.9937413073713491,
+      "Precision": 0.7948717948717948,
+      "Recall": 0.96875,
+      "F1": 0.8732394366197183,
+      "Closed_Accuracy": 0.9943100995732574,
+      "Fold": 11,
+      "Eval_Date": "2026-02-25T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-02-24T00:00:00",
+      "N_Train_Rows": 79192,
+      "N_Eval_Rows": 1438
+    },
+    {
+      "Brier": 0.029286599190846474,
+      "Correlation": 0.9332206996070767,
+      "ROC_AUC": 0.9448290996381354,
+      "PR_AUC": 0.9523033857175083,
+      "Accuracy": 0.9631944444444445,
+      "Precision": 0.952565343659245,
+      "Recall": 0.9959514170040485,
+      "F1": 0.9737753587333003,
+      "Closed_Accuracy": 0.8915929203539823,
+      "Fold": 12,
+      "Eval_Date": "2026-03-02T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-01T00:00:00",
+      "N_Train_Rows": 86390,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 1.070495389011028e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 13,
+      "Eval_Date": "2026-03-07T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-06T00:00:00",
+      "N_Train_Rows": 93590,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.018616386587298805,
+      "Correlation": 0.7580681248550616,
+      "ROC_AUC": 0.963743961352657,
+      "PR_AUC": 0.597414335407758,
+      "Accuracy": 0.9743055555555555,
+      "Precision": 0.6419753086419753,
+      "Recall": 0.8666666666666667,
+      "F1": 0.7375886524822695,
+      "Closed_Accuracy": 0.9789855072463768,
+      "Fold": 14,
+      "Eval_Date": "2026-03-12T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-11T00:00:00",
+      "N_Train_Rows": 100789,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 1.0472539567826567e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 15,
+      "Eval_Date": "2026-03-17T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-16T00:00:00",
+      "N_Train_Rows": 107989,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 1.0541276170128248e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 16,
+      "Eval_Date": "2026-03-22T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-21T00:00:00",
+      "N_Train_Rows": 115188,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 1.3275500935676744e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 17,
+      "Eval_Date": "2026-03-27T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-26T00:00:00",
+      "N_Train_Rows": 122388,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.00856131736462694,
+      "Correlation": 0.8354890949375711,
+      "ROC_AUC": 0.9472390993566834,
+      "PR_AUC": 0.6143889244264613,
+      "Accuracy": 0.9847116052814454,
+      "Precision": 0.6607142857142857,
+      "Recall": 0.925,
+      "F1": 0.7708333333333334,
+      "Closed_Accuracy": 0.9864188706218727,
+      "Fold": 18,
+      "Eval_Date": "2026-04-01T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-03-31T00:00:00",
+      "N_Train_Rows": 129588,
+      "N_Eval_Rows": 1439
+    },
+    {
+      "Brier": 0.02353776496758383,
+      "Correlation": 0.6704177276846975,
+      "ROC_AUC": 0.9287574817113722,
+      "PR_AUC": 0.4473066357373296,
+      "Accuracy": 0.9659722222222222,
+      "Precision": 0.5185185185185185,
+      "Recall": 0.8076923076923077,
+      "F1": 0.631578947368421,
+      "Closed_Accuracy": 0.9719020172910663,
+      "Fold": 19,
+      "Eval_Date": "2026-04-06T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-05T00:00:00",
+      "N_Train_Rows": 136787,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.235580992885892e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 20,
+      "Eval_Date": "2026-04-11T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-10T00:00:00",
+      "N_Train_Rows": 143987,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.272772590842394e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 21,
+      "Eval_Date": "2026-04-16T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-15T00:00:00",
+      "N_Train_Rows": 151187,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.9255735811385124e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 22,
+      "Eval_Date": "2026-04-21T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-20T00:00:00",
+      "N_Train_Rows": 158387,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.816387392998611e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 23,
+      "Eval_Date": "2026-04-26T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-25T00:00:00",
+      "N_Train_Rows": 165586,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.05330121830651166,
+      "Correlation": 0.8277891846090563,
+      "ROC_AUC": 0.9179265629265629,
+      "PR_AUC": 0.7029829598902045,
+      "Accuracy": 0.9048611111111111,
+      "Precision": 0.7178329571106095,
+      "Recall": 0.9636363636363636,
+      "F1": 0.8227684346701164,
+      "Closed_Accuracy": 0.8873873873873874,
+      "Fold": 24,
+      "Eval_Date": "2026-05-01T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-04-30T00:00:00",
+      "N_Train_Rows": 172786,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.5385256644151255e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 25,
+      "Eval_Date": "2026-05-06T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-05T00:00:00",
+      "N_Train_Rows": 179986,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 4.151747333287209e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 26,
+      "Eval_Date": "2026-05-11T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-10T00:00:00",
+      "N_Train_Rows": 187186,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 3.8109071915190916e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 27,
+      "Eval_Date": "2026-05-16T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-15T00:00:00",
+      "N_Train_Rows": 194385,
+      "N_Eval_Rows": 1438
+    },
+    {
+      "Brier": 0.05105511826479992,
+      "Correlation": 0.8008093942189908,
+      "ROC_AUC": 0.9333959175813595,
+      "PR_AUC": 0.6703061905583987,
+      "Accuracy": 0.9193083573487032,
+      "Precision": 0.690625,
+      "Recall": 0.9444444444444444,
+      "F1": 0.7978339350180506,
+      "Closed_Accuracy": 0.91421143847487,
+      "Fold": 28,
+      "Eval_Date": "2026-05-21T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-20T00:00:00",
+      "N_Train_Rows": 201583,
+      "N_Eval_Rows": 1388
+    },
+    {
+      "Brier": 0.006258930690031258,
+      "Correlation": 0.9944806415374989,
+      "ROC_AUC": 0.9936857103141506,
+      "PR_AUC": 0.9910648999080666,
+      "Accuracy": 0.9979152189020153,
+      "Precision": 1.0,
+      "Recall": 0.9875,
+      "F1": 0.9937106918238994,
+      "Closed_Accuracy": 1.0,
+      "Fold": 29,
+      "Eval_Date": "2026-05-26T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-25T00:00:00",
+      "N_Train_Rows": 208783,
+      "N_Eval_Rows": 1439
+    },
+    {
+      "Brier": 6.5952970433470605e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 30,
+      "Eval_Date": "2026-05-31T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-05-30T00:00:00",
+      "N_Train_Rows": 215983,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 7.527497239427513e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 31,
+      "Eval_Date": "2026-06-05T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-04T00:00:00",
+      "N_Train_Rows": 223183,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 8.175921019581242e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 32,
+      "Eval_Date": "2026-06-10T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-09T00:00:00",
+      "N_Train_Rows": 230382,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 6.965712159899139e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 33,
+      "Eval_Date": "2026-06-15T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-14T00:00:00",
+      "N_Train_Rows": 237582,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.053634809404212176,
+      "Correlation": 0.4355585825335931,
+      "ROC_AUC": 0.6167886666245977,
+      "PR_AUC": 0.9513558850115602,
+      "Accuracy": 0.9469387755102041,
+      "Precision": 0.9513888888888888,
+      "Recall": 0.9941944847605225,
+      "F1": 0.9723207948899929,
+      "Closed_Accuracy": 0.2391304347826087,
+      "Fold": 34,
+      "Eval_Date": "2026-06-20T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-19T00:00:00",
+      "N_Train_Rows": 244782,
+      "N_Eval_Rows": 735
+    },
+    {
+      "Brier": 0.015597341095164854,
+      "Correlation": 0.8810816272047373,
+      "ROC_AUC": 0.9745562894107413,
+      "PR_AUC": 0.7616192580261951,
+      "Accuracy": 0.9761570827489481,
+      "Precision": 0.7785714285714286,
+      "Recall": 0.9732142857142857,
+      "F1": 0.8650793650793651,
+      "Closed_Accuracy": 0.9764079147640792,
+      "Fold": 35,
+      "Eval_Date": "2026-06-25T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-24T00:00:00",
+      "N_Train_Rows": 251980,
+      "N_Eval_Rows": 1426
+    },
+    {
+      "Brier": 9.69353051233376e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 36,
+      "Eval_Date": "2026-06-30T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-06-29T00:00:00",
+      "N_Train_Rows": 259179,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.04470724601326538,
+      "Correlation": 0.6634705295447897,
+      "ROC_AUC": 0.9105750487329434,
+      "PR_AUC": 0.4483854379915705,
+      "Accuracy": 0.9242002781641169,
+      "Precision": 0.4971751412429379,
+      "Recall": 0.8148148148148148,
+      "F1": 0.6175438596491228,
+      "Closed_Accuracy": 0.9330827067669173,
+      "Fold": 37,
+      "Eval_Date": "2026-07-05T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-04T00:00:00",
+      "N_Train_Rows": 266379,
+      "N_Eval_Rows": 1438
+    },
+    {
+      "Brier": 1.1052856864388376e-05,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 38,
+      "Eval_Date": "2026-07-10T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-09T00:00:00",
+      "N_Train_Rows": 273578,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 0.013630934616021046,
+      "Correlation": 0.7164668211291917,
+      "ROC_AUC": 0.9123412698412697,
+      "PR_AUC": 0.4708783160623973,
+      "Accuracy": 0.9770194986072424,
+      "Precision": 0.5245901639344263,
+      "Recall": 0.8888888888888888,
+      "F1": 0.6597938144329897,
+      "Closed_Accuracy": 0.9792857142857143,
+      "Fold": 39,
+      "Eval_Date": "2026-07-15T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-14T00:00:00",
+      "N_Train_Rows": 280778,
+      "N_Eval_Rows": 1436
+    },
+    {
+      "Brier": 0.004508644505625747,
+      "Correlation": 0.843772634275223,
+      "ROC_AUC": 0.9857366548042704,
+      "PR_AUC": 0.6719411809158031,
+      "Accuracy": 0.9916083916083916,
+      "Precision": 0.696969696969697,
+      "Recall": 0.92,
+      "F1": 0.7931034482758621,
+      "Closed_Accuracy": 0.9928825622775801,
+      "Fold": 40,
+      "Eval_Date": "2026-07-20T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-19T00:00:00",
+      "N_Train_Rows": 287978,
+      "N_Eval_Rows": 1430
+    },
+    {
+      "Brier": 9.691262799734528e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 41,
+      "Eval_Date": "2026-07-25T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-24T00:00:00",
+      "N_Train_Rows": 295178,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 8.829318601545036e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 42,
+      "Eval_Date": "2026-07-30T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-07-29T00:00:00",
+      "N_Train_Rows": 302378,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 7.95140577353285e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 43,
+      "Eval_Date": "2026-08-04T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-08-03T00:00:00",
+      "N_Train_Rows": 309578,
+      "N_Eval_Rows": 1440
+    },
+    {
+      "Brier": 7.250035150263899e-06,
+      "Correlation": 0.0,
+      "ROC_AUC": 0.0,
+      "PR_AUC": 0.0,
+      "Accuracy": 1.0,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "Closed_Accuracy": 1.0,
+      "Fold": 44,
+      "Eval_Date": "2026-08-09T00:00:00",
+      "Train_Start": "2026-01-01T00:00:00",
+      "Train_End": "2026-08-08T00:00:00",
+      "N_Train_Rows": 316778,
+      "N_Eval_Rows": 55
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "2026-08-09 00:00:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 35.5,
+        "wind_speed_ms": 2.3,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5807029557109398,
+        "wind_dir_cos": 0.8141155183563192,
+        "humidity_change_5min": -1.1000000000000085,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -0.40000000000000036,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 2,
+      "predicted_probability": 0.0006548222840442306,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:01:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 52.6,
+        "wind_speed_ms": 3.1,
+        "pressure_hpa": 1001.5,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7944146205354181,
+        "wind_dir_cos": 0.6073758397232867,
+        "humidity_change_5min": -0.4000000000000057,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944329474931,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:02:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 42.4,
+        "wind_speed_ms": 2.9,
+        "pressure_hpa": 1001.5,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6743023875837234,
+        "wind_dir_cos": 0.7384553406258838,
+        "humidity_change_5min": -1.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.2999999999999998,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491609114,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:03:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 45.2,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7095707365365209,
+        "wind_dir_cos": 0.7046342099635946,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -1.5,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915632954,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:04:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 32.6,
+        "wind_speed_ms": 2.8,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.538770785006863,
+        "wind_dir_cos": 0.8424523970071476,
+        "humidity_change_5min": -0.3999999999999915,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.6999999999999997,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916096532,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:05:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 33.7,
+        "wind_speed_ms": 2.9,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5548444274479993,
+        "wind_dir_cos": 0.8319541221304826,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491612723,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:06:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 40.4,
+        "wind_speed_ms": 2.0,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6481199010631309,
+        "wind_dir_cos": 0.7615383075367368,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -1.1,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916001183,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:07:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 42.9,
+        "wind_speed_ms": 2.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6807208689589177,
+        "wind_dir_cos": 0.7325428987873789,
+        "humidity_change_5min": 0.4000000000000057,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -0.6999999999999997,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916087716,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:08:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 57.6,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.8443279255020151,
+        "wind_dir_cos": 0.5358267949789965,
+        "humidity_change_5min": 0.20000000000000284,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.0,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491627402,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:09:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 37.8,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6129070536529764,
+        "wind_dir_cos": 0.7901550123756904,
+        "humidity_change_5min": 0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.2999999999999998,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916252896,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:10:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 16.9,
+        "wind_speed_ms": 2.8,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.29070219359825245,
+        "wind_dir_cos": 0.9568135840576074,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.10000000000000009,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916200226,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:11:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 53.9,
+        "wind_speed_ms": 3.7,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.8079898838980305,
+        "wind_dir_cos": 0.5891963573533421,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.7000000000000002,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444914033365,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:12:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 49.3,
+        "wind_speed_ms": 3.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7581343361976522,
+        "wind_dir_cos": 0.6520984038303922,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.2999999999999998,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491537649,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:13:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 58.7,
+        "wind_speed_ms": 3.4,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.8544588301328074,
+        "wind_dir_cos": 0.5195191118795094,
+        "humidity_change_5min": -0.4000000000000057,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 0.8999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491538322,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:14:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 19.1,
+        "wind_speed_ms": 2.8,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.3272178989791039,
+        "wind_dir_cos": 0.9449489121575309,
+        "humidity_change_5min": -0.4000000000000057,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.2999999999999998,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491615818,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:15:00",
+      "features": {
+        "temperature_c": 28.2,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 27.9,
+        "wind_speed_ms": 3.0,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.46792981426057334,
+        "wind_dir_cos": 0.8837656300886935,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.20000000000000018,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916149576,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:16:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 12.8,
+        "wind_speed_ms": 2.8,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.2215484976194673,
+        "wind_dir_cos": 0.9751493543055633,
+        "humidity_change_5min": 0.29999999999999716,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -0.9000000000000004,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915844703,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:17:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 29.9,
+        "wind_speed_ms": 3.3,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.49848773975383026,
+        "wind_dir_cos": 0.8668967489356029,
+        "humidity_change_5min": 0.19999999999998863,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.20000000000000018,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491610787,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:18:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 28.7,
+        "wind_speed_ms": 3.3,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.48022349744318893,
+        "wind_dir_cos": 0.8771461637055887,
+        "humidity_change_5min": 0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.10000000000000009,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491610421,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:19:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 45.4,
+        "wind_speed_ms": 2.1,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 64.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7120260459909965,
+        "wind_dir_cos": 0.7021530529951624,
+        "humidity_change_5min": 0.10000000000000853,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -0.6999999999999997,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916107687,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:20:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 48.3,
+        "wind_speed_ms": 2.4,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7466381822853914,
+        "wind_dir_cos": 0.6652303546543609,
+        "humidity_change_5min": 0.20000000000000284,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491625499,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:21:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 35.6,
+        "wind_speed_ms": 1.9,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5821229701572894,
+        "wind_dir_cos": 0.8131007610470277,
+        "humidity_change_5min": 0.10000000000000853,
+        "pressure_change_5min": 0.10000000000002274,
+        "wind_change_5min": -0.8999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491603016,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:22:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 39.3,
+        "wind_speed_ms": 2.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6333808726275502,
+        "wind_dir_cos": 0.7738402097265062,
+        "humidity_change_5min": 0.10000000000000853,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -1.0999999999999996,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491619218,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:23:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 19.6,
+        "wind_speed_ms": 2.8,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.33545156975025503,
+        "wind_dir_cos": 0.9420574527872967,
+        "humidity_change_5min": 0.20000000000000284,
+        "pressure_change_5min": 0.10000000000002274,
+        "wind_change_5min": -0.5,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915930845,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:24:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 39.4,
+        "wind_speed_ms": 4.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6347305132022676,
+        "wind_dir_cos": 0.7727335734973511,
+        "humidity_change_5min": 0.3999999999999915,
+        "pressure_change_5min": 0.10000000000002274,
+        "wind_change_5min": 2.1,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444896219694,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:25:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 65.2,
+        "wind_speed_ms": 3.8,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.9077774785329087,
+        "wind_dir_cos": 0.4194520824461771,
+        "humidity_change_5min": 0.20000000000000284,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.4,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444914966594,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:26:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 30.5,
+        "wind_speed_ms": 2.7,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5075383629607041,
+        "wind_dir_cos": 0.8616291604415258,
+        "humidity_change_5min": 0.09999999999999432,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.8000000000000003,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916106633,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:27:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 41.5,
+        "wind_speed_ms": 3.4,
+        "pressure_hpa": 1001.5,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.6626200482157375,
+        "wind_dir_cos": 0.7489557207890021,
+        "humidity_change_5min": -0.10000000000000853,
+        "pressure_change_5min": 0.10000000000002274,
+        "wind_change_5min": 1.1999999999999997,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491470755,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:28:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 21.4,
+        "wind_speed_ms": 2.1,
+        "pressure_hpa": 1001.5,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.3648767843376196,
+        "wind_dir_cos": 0.9310558158625283,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.10000000000002274,
+        "wind_change_5min": -0.6999999999999997,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916035305,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:29:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 9.8,
+        "wind_speed_ms": 2.1,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.17020949916603256,
+        "wind_dir_cos": 0.9854078984834901,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -2.1,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491527794,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:30:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 47.0,
+        "wind_speed_ms": 2.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.7313537016191705,
+        "wind_dir_cos": 0.6819983600624985,
+        "humidity_change_5min": 0.09999999999999432,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -1.5999999999999996,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916012195,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:31:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 4.1,
+        "wind_speed_ms": 1.4,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.8
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.07149744433268591,
+        "wind_dir_cos": 0.997440782930944,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -1.3000000000000003,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491611363,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:32:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 57.4,
+        "wind_speed_ms": 3.6,
+        "pressure_hpa": 1001.5,
+        "humidity_percent": 64.6
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.8424523970071476,
+        "wind_dir_cos": 0.538770785006863,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.20000000000000018,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491601793,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:33:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 34.0,
+        "wind_speed_ms": 3.6,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5591929034707469,
+        "wind_dir_cos": 0.8290375725550417,
+        "humidity_change_5min": -0.09999999999999432,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 1.5,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491338018,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:34:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 52.3,
+        "wind_speed_ms": 3.4,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.79122353296749,
+        "wind_dir_cos": 0.6115270401858313,
+        "humidity_change_5min": 0.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.2999999999999998,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915497376,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:35:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 61.5,
+        "wind_speed_ms": 4.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.2
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.8788171126619654,
+        "wind_dir_cos": 0.4771587602596084,
+        "humidity_change_5min": -0.5999999999999943,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 2.0,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444908208246,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:36:00",
+      "features": {
+        "temperature_c": 28.1,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 7.3,
+        "wind_speed_ms": 2.6,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.1270646086013505,
+        "wind_dir_cos": 0.9918944425900297,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.2000000000000002,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915855397,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:37:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 32.5,
+        "wind_speed_ms": 2.6,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.5372996083468238,
+        "wind_dir_cos": 0.8433914458128857,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -1.0,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491588294,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:38:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 26.0,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.4383711467890774,
+        "wind_dir_cos": 0.898794046299167,
+        "humidity_change_5min": -0.29999999999999716,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -1.1,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916121083,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:39:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 349.8,
+        "wind_speed_ms": 1.3,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 64.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": -0.17708474031958313,
+        "wind_dir_cos": 0.984195607969242,
+        "humidity_change_5min": -0.09999999999999432,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -2.0999999999999996,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491521071,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:40:00",
+      "features": {
+        "temperature_c": 28.0,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 14.1,
+        "wind_speed_ms": 0.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 65.2
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.2436150117860225,
+        "wind_dir_cos": 0.9698720152847468,
+        "humidity_change_5min": 1.0,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -3.7,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944481176104,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:41:00",
+      "features": {
+        "temperature_c": 27.9,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 23.5,
+        "wind_speed_ms": 2.2,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 65.2
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.3987490689252462,
+        "wind_dir_cos": 0.917060074385124,
+        "humidity_change_5min": 0.7000000000000028,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.3999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491624215,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:42:00",
+      "features": {
+        "temperature_c": 27.9,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 20.4,
+        "wind_speed_ms": 2.3,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 65.5
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.3485720473218152,
+        "wind_dir_cos": 0.9372819894918916,
+        "humidity_change_5min": 1.2000000000000028,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.30000000000000027,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491618547,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:43:00",
+      "features": {
+        "temperature_c": 27.9,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 12.2,
+        "wind_speed_ms": 1.7,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 66.0
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.21132479645538865,
+        "wind_dir_cos": 0.9774158942860959,
+        "humidity_change_5min": 1.5999999999999943,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.8,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491607628,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:44:00",
+      "features": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 10.7,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 66.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.1856666153855772,
+        "wind_dir_cos": 0.9826127965436152,
+        "humidity_change_5min": 1.8999999999999915,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 1.2,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491524522,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:45:00",
+      "features": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 16.4,
+        "wind_speed_ms": 1.4,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 66.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.2823414568428764,
+        "wind_dir_cos": 0.9593139745400575,
+        "humidity_change_5min": 1.5,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.8999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915972335,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:46:00",
+      "features": {
+        "temperature_c": 27.7,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 13.1,
+        "wind_speed_ms": 1.6,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 66.9
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.22665130743685502,
+        "wind_dir_cos": 0.9739759672790517,
+        "humidity_change_5min": 1.7000000000000028,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916089325,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:47:00",
+      "features": {
+        "temperature_c": 27.7,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 14.8,
+        "wind_speed_ms": 1.9,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 67.1
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.25544575793579055,
+        "wind_dir_cos": 0.9668233886044594,
+        "humidity_change_5min": 1.5999999999999943,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.3999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491613792,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:48:00",
+      "features": {
+        "temperature_c": 27.7,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 20.9,
+        "wind_speed_ms": 1.1,
+        "pressure_hpa": 1001.4,
+        "humidity_percent": 67.3
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.35673799931962513,
+        "wind_dir_cos": 0.9342044743210295,
+        "humidity_change_5min": 1.2999999999999972,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": -0.5999999999999999,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444916935115,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:49:00",
+      "features": {
+        "temperature_c": 27.6,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 6.9,
+        "wind_speed_ms": 1.5,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 67.4
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.1201368388346471,
+        "wind_dir_cos": 0.9927573419294455,
+        "humidity_change_5min": 1.1000000000000085,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": -1.0,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.00271594449158879,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:50:00",
+      "features": {
+        "temperature_c": 27.6,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 11.5,
+        "wind_speed_ms": 2.0,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 67.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.1993679344171972,
+        "wind_dir_cos": 0.9799247046208296,
+        "humidity_change_5min": 1.0,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491593627,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:51:00",
+      "features": {
+        "temperature_c": 27.6,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 0.0,
+        "wind_speed_ms": 1.7,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 67.7
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.0,
+        "wind_dir_cos": 1.0,
+        "humidity_change_5min": 0.7999999999999972,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 0.09999999999999987,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491610188,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:52:00",
+      "features": {
+        "temperature_c": 27.6,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 15.5,
+        "wind_speed_ms": 2.5,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 68.1
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.26723837607825685,
+        "wind_dir_cos": 0.963630453208623,
+        "humidity_change_5min": 1.0,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.0027159444915865315,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:53:00",
+      "features": {
+        "temperature_c": 27.5,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 9.8,
+        "wind_speed_ms": 2.1,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 68.1
+      },
+      "hmm_features": {
+        "wind_dir_sin": 0.17020949916603256,
+        "wind_dir_cos": 0.9854078984834901,
+        "humidity_change_5min": 0.7999999999999972,
+        "pressure_change_5min": -0.10000000000002274,
+        "wind_change_5min": 1.0,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491574843,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    },
+    {
+      "timestamp": "2026-08-09 00:54:00",
+      "features": {
+        "temperature_c": 27.5,
+        "precipitation_mm": 0.0,
+        "precipitation_presence": 0.0,
+        "wind_direction_deg": 357.2,
+        "wind_speed_ms": 2.1,
+        "pressure_hpa": 1001.3,
+        "humidity_percent": 68.2
+      },
+      "hmm_features": {
+        "wind_dir_sin": -0.04884976979561313,
+        "wind_dir_cos": 0.9988061373414341,
+        "humidity_change_5min": 0.7999999999999972,
+        "pressure_change_5min": 0.0,
+        "wind_change_5min": 0.6000000000000001,
+        "rain_5min": 0.0
+      },
+      "hmm_state": 0,
+      "predicted_probability": 0.002715944491410151,
+      "predicted_open": 0,
+      "actual_future_rain_score": 0.0,
+      "actual_rain": 0
+    }
+  ]
+}

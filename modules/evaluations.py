@@ -18,8 +18,13 @@ from sklearn.metrics import (
 
 def calculate_metrics(result):
     """
-    Calculate probabilistic + classification metrics.
+    Calculate probabilistic and classification metrics
+    for the umbrella OPEN/CLOSE decision.
     """
+
+    # ========================================================
+    # PREDICTION AND GROUND TRUTH
+    # ========================================================
 
     y_true = result[
         "Actual_Soft_Label"
@@ -29,9 +34,9 @@ def calculate_metrics(result):
         "P_OPEN"
     ].to_numpy()
 
-    # ----------------------------------------
-    # Soft-label metrics
-    # ----------------------------------------
+    # ========================================================
+    # SOFT-LABEL METRICS
+    # ========================================================
 
     brier = np.mean(
         (y_pred - y_true) ** 2
@@ -49,9 +54,9 @@ def calculate_metrics(result):
     else:
         correlation = 0.0
 
-    # ----------------------------------------
-    # Binary reference target
-    # ----------------------------------------
+    # ========================================================
+    # BINARY OPEN/CLOSE REFERENCE
+    # ========================================================
 
     y_true_binary = (
         y_true >= 0.5
@@ -60,6 +65,10 @@ def calculate_metrics(result):
     y_pred_binary = (
         y_pred >= 0.5
     ).astype(int)
+
+    # ========================================================
+    # CLASSIFICATION METRICS
+    # ========================================================
 
     accuracy = accuracy_score(
         y_true_binary,
@@ -84,18 +93,53 @@ def calculate_metrics(result):
         zero_division=0
     )
 
-    no_rain_mask = (y_true_binary == 0)
+    # ========================================================
+    # CLOSED ACCURACY
+    # ========================================================
+    #
+    # Among samples where the actual target is CLOSE,
+    # how often does the model correctly predict CLOSE?
 
-    if no_rain_mask.sum() > 0:
+    closed_mask = (
+        y_true_binary == 0
+    )
+
+    if closed_mask.sum() > 0:
+
         closed_accuracy = (
-            y_pred_binary[no_rain_mask] == 0
+            y_pred_binary[closed_mask] == 0
         ).mean()
+
     else:
+
         closed_accuracy = 0.0
 
-    # ----------------------------------------
+    # ========================================================
+    # OPEN ACCURACY
+    # ========================================================
+    #
+    # Among samples where the actual target is OPEN,
+    # how often does the model correctly predict OPEN?
+    #
+    # This is effectively the same as recall.
+
+    open_mask = (
+        y_true_binary == 1
+    )
+
+    if open_mask.sum() > 0:
+
+        open_accuracy = (
+            y_pred_binary[open_mask] == 1
+        ).mean()
+
+    else:
+
+        open_accuracy = 0.0
+
+    # ========================================================
     # ROC / PR
-    # ----------------------------------------
+    # ========================================================
 
     if len(
         np.unique(y_true_binary)
@@ -112,9 +156,16 @@ def calculate_metrics(result):
         )
 
     else:
-        # No positive/negative rain event in this evaluation block
+
+        # Evaluation block contains only OPEN
+        # or only CLOSE samples.
+
         roc_auc = 0.0
         pr_auc = 0.0
+
+    # ========================================================
+    # RETURN METRICS
+    # ========================================================
 
     return {
         "Brier": brier,
@@ -125,11 +176,14 @@ def calculate_metrics(result):
         "Precision": precision,
         "Recall": recall,
         "F1": f1,
+        "Open_Accuracy": open_accuracy,
         "Closed_Accuracy": closed_accuracy,
     }
 
-def evaluate_fold(json_path, threshold=0.5):
-
+def evaluate_fold(
+    json_path,
+    threshold=0.5
+):
     with open(
         json_path,
         "r",
@@ -137,84 +191,90 @@ def evaluate_fold(json_path, threshold=0.5):
     ) as f:
         data = json.load(f)
 
+    # --------------------------------------------------------
+    # Extract records
+    # --------------------------------------------------------
+
     records = data["records"]
 
-    df = pd.DataFrame(records)
+    rows = []
+
+    for record in records:
+
+        model = record.get(
+            "model",
+            {}
+        )
+
+        ground_truth = record.get(
+            "ground_truth",
+            {}
+        )
+
+        rows.append({
+
+            "predicted_probability": model.get(
+                "predicted_p_open",
+                np.nan
+            ),
+
+            "actual_open": ground_truth.get(
+                "actual_open",
+                np.nan
+            ),
+
+            "actual_open_score": ground_truth.get(
+                "future_open_score",
+                np.nan
+            ),
+
+            "future_rain_score": ground_truth.get(
+                "future_rain_score",
+                np.nan
+            ),
+
+            "future_heat_score": ground_truth.get(
+                "future_heat_score",
+                np.nan
+            ),
+        })
+
+    df = pd.DataFrame(rows)
 
     # --------------------------------------------------------
-    # timestamp
-    # --------------------------------------------------------
-
-    df["timestamp"] = pd.to_datetime(
-        df["timestamp"],
-        errors="coerce"
-    )
-
-    # --------------------------------------------------------
-    # numeric conversion
-    # --------------------------------------------------------
-
-    numeric_cols = [
-        "predicted_probability",
-        "actual_future_rain_score",
-        "predicted_open",
-        "actual_rain",
-        "hmm_state",
-    ]
-
-    for col in numeric_cols:
-
-        if col in df.columns:
-
-            df[col] = pd.to_numeric(
-                df[col],
-                errors="coerce"
-            )
-
-    # --------------------------------------------------------
-    # Remove invalid rows
+    # Remove invalid records
     # --------------------------------------------------------
 
     df = df.dropna(
         subset=[
             "predicted_probability",
-            "actual_rain",
+            "actual_open",
         ]
-    ).copy()
+    )
+
+    if len(df) == 0:
+        raise ValueError(
+            "No valid evaluation records found."
+        )
 
     # --------------------------------------------------------
     # Prediction
     # --------------------------------------------------------
 
-    y_true = (
-        df["actual_rain"]
-        .astype(int)
-        .to_numpy()
-    )
+    y_pred_prob = df[
+        "predicted_probability"
+    ].to_numpy()
 
-    y_prob = (
-        df["predicted_probability"]
-        .astype(float)
-        .clip(0, 1)
-        .to_numpy()
-    )
+    y_true = df[
+        "actual_open"
+    ].astype(int).to_numpy()
 
     y_pred = (
-        y_prob >= threshold
+        y_pred_prob >= threshold
     ).astype(int)
 
     # --------------------------------------------------------
-    # Confusion matrix
-    # --------------------------------------------------------
-
-    tn, fp, fn, tp = confusion_matrix(
-        y_true,
-        y_pred,
-        labels=[0, 1]
-    ).ravel()
-
-    # --------------------------------------------------------
-    # Basic metrics
+    # Classification metrics
     # --------------------------------------------------------
 
     accuracy = accuracy_score(
@@ -222,132 +282,110 @@ def evaluate_fold(json_path, threshold=0.5):
         y_pred
     )
 
-    # Specificity / Closed Accuracy
-    if (tn + fp) > 0:
-        closed_accuracy = tn / (tn + fp)
-    else:
-        closed_accuracy = np.nan
-
-    # Rain recall
-    if (tp + fn) > 0:
-        rain_recall = tp / (tp + fn)
-    else:
-        rain_recall = np.nan
-
-    # Open precision
-    if (tp + fp) > 0:
-        open_precision = tp / (tp + fp)
-    else:
-        open_precision = np.nan
-
-    # F1
-    if (tp + fn) > 0 and (tp + fp) > 0:
-        f1 = f1_score(
-            y_true,
-            y_pred,
-            zero_division=0
-        )
-    else:
-        f1 = np.nan
-
-    # --------------------------------------------------------
-    # Probability metrics
-    # --------------------------------------------------------
-
-    brier = brier_score_loss(
+    precision = precision_score(
         y_true,
-        y_prob
+        y_pred,
+        zero_division=0
     )
 
-    # AUC only makes sense if both classes exist
-    if len(np.unique(y_true)) == 2:
+    recall = recall_score(
+        y_true,
+        y_pred,
+        zero_division=0
+    )
 
-        roc_auc = roc_auc_score(
-            y_true,
-            y_prob
-        )
+    f1 = f1_score(
+        y_true,
+        y_pred,
+        zero_division=0
+    )
 
-        pr_auc = average_precision_score(
-            y_true,
-            y_prob
-        )
+    # --------------------------------------------------------
+    # CLOSED accuracy
+    # --------------------------------------------------------
+
+    closed_mask = (
+        y_true == 0
+    )
+
+    if closed_mask.sum() > 0:
+
+        closed_accuracy = (
+            y_pred[closed_mask] == 0
+        ).mean()
 
     else:
 
-        roc_auc = np.nan
-        pr_auc = np.nan
+        closed_accuracy = 0.0
 
     # --------------------------------------------------------
-    # Fold ID
+    # OPEN accuracy
     # --------------------------------------------------------
 
-    fold_number = None
+    open_mask = (
+        y_true == 1
+    )
 
-    try:
-        fold_number = int(
-            json_path.stem.split("_")[-1]
-        )
-    except Exception:
-        pass
+    if open_mask.sum() > 0:
 
-    # --------------------------------------------------------
-    # Date
-    # --------------------------------------------------------
-
-    if len(df) > 0:
-
-        eval_date = (
-            df["timestamp"]
-            .min()
-            .strftime("%Y-%m-%d")
-        )
+        open_accuracy = (
+            y_pred[open_mask] == 1
+        ).mean()
 
     else:
 
-        eval_date = None
+        open_accuracy = 0.0
 
     # --------------------------------------------------------
-    # Return everything
+    # Additional event information
+    # --------------------------------------------------------
+
+    rain_minutes = (
+        df["future_rain_score"] >= 0.5
+    ).sum()
+
+    heat_minutes = (
+        df["future_heat_score"] >= 0.5
+    ).sum()
+
+    open_minutes = (
+        y_true == 1
+    ).sum()
+
+    # --------------------------------------------------------
+    # Return results
     # --------------------------------------------------------
 
     return {
-        "fold": fold_number,
-        "date": eval_date,
 
-        "n_minutes": len(df),
+        "fold": data.get(
+            "fold",
+            None
+        ),
 
         "rain_minutes": int(
-            y_true.sum()
+            rain_minutes
         ),
 
-        "dry_minutes": int(
-            (y_true == 0).sum()
+        "heat_minutes": int(
+            heat_minutes
         ),
 
-        "predicted_open_minutes": int(
-            y_pred.sum()
+        "open_minutes": int(
+            open_minutes
         ),
-
-        "TP": int(tp),
-        "TN": int(tn),
-        "FP": int(fp),
-        "FN": int(fn),
 
         "accuracy": accuracy,
 
         "closed_accuracy": closed_accuracy,
 
-        "rain_recall": rain_recall,
+        "open_accuracy": open_accuracy,
 
-        "open_precision": open_precision,
+        "open_recall": recall,
+
+        "open_precision": precision,
 
         "f1": f1,
-
-        "brier": brier,
-
-        "roc_auc": roc_auc,
-
-        "pr_auc": pr_auc,
     }
 
 def evaluate_all_folds(
@@ -389,9 +427,11 @@ def evaluate_all_folds(
             print(
                 f"Fold {fold:02d} | "
                 f"Rain={result['rain_minutes']:4d} | "
+                f"Heat={result['heat_minutes']:4d} | "
+                f"Open={result['open_minutes']:4d} | "
                 f"Accuracy={result['accuracy']:.3f} | "
                 f"Closed={result['closed_accuracy']:.3f} | "
-                f"Recall={result['rain_recall']:.3f} | "
+                f"Recall={result['open_recall']:.3f} | "
                 f"Precision={result['open_precision']:.3f} | "
                 f"F1={result['f1']:.3f}"
             )

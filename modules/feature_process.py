@@ -115,10 +115,18 @@ def create_features(df, HORIZON=5):
 
     return df
 
-def create_future_label(df, horizon=5):
+def create_future_label(
+    df,
+    horizon=5,
+    heat_center=31.0,
+    heat_steepness=1.0,
+):
     df = df.copy()
 
-    # 10 = precipitation present
+    # ========================================================
+    # RAIN SCORE
+    # ========================================================
+
     rain = (
         df["Precipitation Presence (Presence/Absence)"]
         .fillna(0)
@@ -126,7 +134,6 @@ def create_future_label(df, horizon=5):
         .astype(float)
     )
 
-    # Future precipitation probability over next HORIZON minutes
     future_rain = sum(
         rain.shift(-i)
         for i in range(1, horizon + 1)
@@ -136,11 +143,117 @@ def create_future_label(df, horizon=5):
         future_rain / horizon
     )
 
-    # Remove rows where the complete future horizon
-    # does not exist
+    # ========================================================
+    # HEAT DISCOMFORT SCORE
+    # Temperature + Humidity
+    # ========================================================
+
+    temperature = pd.to_numeric(
+        df["Temperature (°C)"],
+        errors="coerce"
+    )
+
+    humidity = pd.to_numeric(
+        df["Humidity (%)"],
+        errors="coerce"
+    )
+
+    # Simple temperature-humidity discomfort approximation.
+    #
+    # Higher temperature + higher humidity
+    # -> higher effective heat discomfort.
+
+    effective_heat = (
+        temperature
+        + 0.1 * (humidity - 50)
+    )
+
+    df["effective_heat"] = effective_heat
+
+    # Convert heat discomfort into a soft probability.
+    #
+    # Around heat_center = 31 -> approximately 0.5
+    # Higher -> gradually approaches 1
+    # Lower  -> gradually approaches 0
+
+    df["heat_score"] = (
+        1
+        /
+        (
+            1
+            + np.exp(
+                -heat_steepness
+                * (
+                    df["effective_heat"]
+                    - heat_center
+                )
+            )
+        )
+    )
+
+    # Optional: force clearly comfortable conditions to zero.
+    #
+    # Example:
+    # effective_heat <= 28 -> no heat reason to open
+
     df.loc[
-        df["future_rain_score"].isna(),
-        "future_rain_score"
+        df["effective_heat"] <= 28,
+        "heat_score"
+    ] = 0.0
+
+    # ========================================================
+    # FUTURE HEAT SCORE
+    # ========================================================
+
+    future_heat = sum(
+        df["heat_score"].shift(-i)
+        for i in range(1, horizon + 1)
+    )
+
+    df["future_heat_score"] = (
+        future_heat / horizon
+    )
+
+    # ========================================================
+    # COMBINE RAIN + HEAT
+    # ========================================================
+    #
+    # Probabilistic union:
+    #
+    # P(OPEN) =
+    # 1 - (1 - P(RAIN)) * (1 - P(HEAT))
+    #
+    # Either rain or heat can cause OPEN.
+
+    df["future_open_score"] = (
+        1
+        -
+        (
+            1 - df["future_rain_score"]
+        )
+        *
+        (
+            1 - df["future_heat_score"]
+        )
+    )
+
+    # ========================================================
+    # INVALID FUTURE HORIZON
+    # ========================================================
+
+    invalid_future = (
+        df["future_rain_score"].isna()
+        |
+        df["future_heat_score"].isna()
+    )
+
+    df.loc[
+        invalid_future,
+        [
+            "future_rain_score",
+            "future_heat_score",
+            "future_open_score",
+        ]
     ] = np.nan
 
     return df

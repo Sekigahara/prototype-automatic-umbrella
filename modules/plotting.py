@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def plot_fold_metrics(results):
+
     fig, axes = plt.subplots(
         3,
         1,
@@ -13,7 +14,7 @@ def plot_fold_metrics(results):
     x = results["fold"]
 
     # ========================================================
-    # Overall / closed
+    # OVERALL OPEN / CLOSE PERFORMANCE
     # ========================================================
 
     axes[0].plot(
@@ -30,6 +31,13 @@ def plot_fold_metrics(results):
         label="Closed Accuracy"
     )
 
+    axes[0].plot(
+        x,
+        results["open_accuracy"],
+        marker="o",
+        label="Open Accuracy"
+    )
+
     axes[0].set_ylabel(
         "Score"
     )
@@ -40,7 +48,7 @@ def plot_fold_metrics(results):
     )
 
     axes[0].set_title(
-        "Daily Umbrella Decision Performance"
+        "Daily Umbrella OPEN / CLOSE Performance"
     )
 
     axes[0].legend()
@@ -50,14 +58,14 @@ def plot_fold_metrics(results):
     )
 
     # ========================================================
-    # Rain detection
+    # OPEN DETECTION
     # ========================================================
 
     axes[1].plot(
         x,
-        results["rain_recall"],
+        results["open_recall"],
         marker="o",
-        label="Rain Recall"
+        label="Open Recall"
     )
 
     axes[1].plot(
@@ -84,7 +92,7 @@ def plot_fold_metrics(results):
     )
 
     axes[1].set_title(
-        "Rain / Opening Detection Performance"
+        "Umbrella OPEN Detection Performance"
     )
 
     axes[1].legend()
@@ -94,28 +102,28 @@ def plot_fold_metrics(results):
     )
 
     # ========================================================
-    # Probability quality
+    # EVENT DISTRIBUTION
     # ========================================================
 
     axes[2].plot(
         x,
-        results["roc_auc"],
+        results["rain_minutes"],
         marker="o",
-        label="ROC-AUC"
+        label="Rain-related minutes"
     )
 
     axes[2].plot(
         x,
-        results["pr_auc"],
+        results["heat_minutes"],
         marker="o",
-        label="PR-AUC"
+        label="Heat-related minutes"
     )
 
     axes[2].plot(
         x,
-        results["brier"],
+        results["open_minutes"],
         marker="o",
-        label="Brier Score"
+        label="Total OPEN minutes"
     )
 
     axes[2].set_xlabel(
@@ -123,11 +131,11 @@ def plot_fold_metrics(results):
     )
 
     axes[2].set_ylabel(
-        "Score"
+        "Minutes"
     )
 
     axes[2].set_title(
-        "Probability Quality"
+        "OPEN Condition Distribution"
     )
 
     axes[2].legend()
@@ -140,15 +148,33 @@ def plot_fold_metrics(results):
 
     plt.show()
 
-def plot_rain_distribution(results):
+def plot_open_distribution(results):
 
     plt.figure(
         figsize=(16, 5)
     )
 
-    plt.bar(
-        results["fold"],
-        results["rain_minutes"]
+    x = results["fold"]
+
+    plt.plot(
+        x,
+        results["rain_minutes"],
+        marker="o",
+        label="Rain minutes"
+    )
+
+    plt.plot(
+        x,
+        results["heat_minutes"],
+        marker="o",
+        label="Heat minutes"
+    )
+
+    plt.plot(
+        x,
+        results["open_minutes"],
+        marker="o",
+        label="OPEN minutes"
     )
 
     plt.xlabel(
@@ -156,15 +182,16 @@ def plot_rain_distribution(results):
     )
 
     plt.ylabel(
-        "Rain minutes"
+        "Minutes"
     )
 
     plt.title(
-        "Rain Occurrence per Evaluation Day"
+        "Rain, Heat, and OPEN Conditions per Evaluation Day"
     )
 
+    plt.legend()
+
     plt.grid(
-        axis="y",
         alpha=0.3
     )
 
@@ -172,24 +199,32 @@ def plot_rain_distribution(results):
 
     plt.show()
 
-def plot_rainy_folds(
+def plot_open_folds(
     results,
     log_dir,
     threshold=0.5,
     max_folds=None
 ):
 
-    rainy = results[
-        results["rain_minutes"] > 0
+    # ========================================================
+    # SELECT FOLDS THAT CONTAIN OPEN CONDITIONS
+    # ========================================================
+
+    open_folds = results[
+        results["open_minutes"] > 0
     ].copy()
 
     if max_folds is not None:
 
-        rainy = rainy.head(
+        open_folds = open_folds.head(
             max_folds
         )
 
-    for _, row in rainy.iterrows():
+    # ========================================================
+    # LOOP THROUGH FOLDS
+    # ========================================================
+
+    for _, row in open_folds.iterrows():
 
         fold = int(
             row["fold"]
@@ -208,68 +243,165 @@ def plot_rainy_folds(
 
             data = json.load(f)
 
+        records = []
+
+        # ====================================================
+        # FLATTEN NESTED JSON
+        # ====================================================
+
+        for record in data["records"]:
+
+            model = record.get(
+                "model",
+                {}
+            )
+
+            ground_truth = record.get(
+                "ground_truth",
+                {}
+            )
+
+            heat_info = record.get(
+                "heat_information",
+                {}
+            )
+
+            records.append({
+
+                "timestamp": record.get(
+                    "timestamp"
+                ),
+
+                # Prediction
+                "predicted_probability": model.get(
+                    "predicted_p_open"
+                ),
+
+                "predicted_action": model.get(
+                    "predicted_action"
+                ),
+
+                # Ground truth
+                "actual_open": ground_truth.get(
+                    "actual_open"
+                ),
+
+                "future_open_score": ground_truth.get(
+                    "future_open_score"
+                ),
+
+                "future_rain_score": ground_truth.get(
+                    "future_rain_score"
+                ),
+
+                "future_heat_score": ground_truth.get(
+                    "future_heat_score"
+                ),
+
+                # Heat debug
+                "effective_heat": heat_info.get(
+                    "effective_heat"
+                ),
+
+                "heat_score": heat_info.get(
+                    "heat_score"
+                ),
+            })
+
         df = pd.DataFrame(
-            data["records"]
+            records
         )
+
+        # ====================================================
+        # TYPE CONVERSION
+        # ====================================================
 
         df["timestamp"] = pd.to_datetime(
             df["timestamp"]
         )
 
-        df["predicted_probability"] = pd.to_numeric(
-            df["predicted_probability"],
-            errors="coerce"
-        )
+        numeric_cols = [
+            "predicted_probability",
+            "actual_open",
+            "future_open_score",
+            "future_rain_score",
+            "future_heat_score",
+            "effective_heat",
+            "heat_score",
+        ]
 
-        df["actual_rain"] = pd.to_numeric(
-            df["actual_rain"],
-            errors="coerce"
-        )
+        for col in numeric_cols:
+
+            df[col] = pd.to_numeric(
+                df[col],
+                errors="coerce"
+            )
 
         df = df.sort_values(
             "timestamp"
         )
+
+        # ====================================================
+        # PREDICTED BINARY ACTION
+        # ====================================================
 
         df["predicted_open"] = (
             df["predicted_probability"]
             >= threshold
         ).astype(int)
 
-        # ----------------------------------------------------
-        # Plot
-        # ----------------------------------------------------
+        # ====================================================
+        # CLASSIFICATION ERROR
+        # ====================================================
+
+        wrong = (
+            df["actual_open"]
+            != df["predicted_open"]
+        )
+
+        error = wrong.astype(int)
+
+        # ====================================================
+        # PLOT
+        # ====================================================
 
         fig, axes = plt.subplots(
-            3,
+            4,
             1,
-            figsize=(16, 8),
+            figsize=(16, 11),
             sharex=True,
             gridspec_kw={
-                "height_ratios": [2, 2, 0.6]
+                "height_ratios": [
+                    2,
+                    1.5,
+                    1.5,
+                    0.6
+                ]
             }
         )
 
-        # Probability
+        # ====================================================
+        # 1. P(OPEN) VS ACTUAL SOFT LABEL
+        # ====================================================
+
         axes[0].plot(
             df["timestamp"],
             df["predicted_probability"],
-            label="HMM P(Open)",
+            label="HMM P(OPEN)",
+            linewidth=1
+        )
+
+        axes[0].plot(
+            df["timestamp"],
+            df["future_open_score"],
+            label="Actual OPEN Score",
             linewidth=1
         )
 
         axes[0].axhline(
             threshold,
             linestyle="--",
-            label="Threshold"
-        )
-
-        axes[0].fill_between(
-            df["timestamp"],
-            0,
-            1,
-            where=df["actual_rain"].astype(bool),
-            alpha=0.2,
-            label="Actual rain"
+            label="Decision Threshold"
         )
 
         axes[0].set_ylim(
@@ -278,13 +410,14 @@ def plot_rainy_folds(
         )
 
         axes[0].set_ylabel(
-            "P(Open)"
+            "Probability"
         )
 
         axes[0].set_title(
             f"Fold {fold:02d} | "
-            f"{row['date']} | "
             f"Rain={row['rain_minutes']} min | "
+            f"Heat={row['heat_minutes']} min | "
+            f"OPEN={row['open_minutes']} min | "
             f"F1={row['f1']:.3f}"
         )
 
@@ -294,35 +427,43 @@ def plot_rainy_folds(
             alpha=0.3
         )
 
-        # ----------------------------------------------------
-        # Actual vs prediction
-        # ----------------------------------------------------
+        # ====================================================
+        # 2. RAIN + HEAT CONTRIBUTIONS
+        # ====================================================
 
-        axes[1].step(
+        axes[1].plot(
             df["timestamp"],
-            df["actual_rain"],
-            where="post",
-            label="Actual",
+            df["future_rain_score"],
+            label="Future Rain Score",
+            linewidth=1
+        )
+
+        axes[1].plot(
+            df["timestamp"],
+            df["future_heat_score"],
+            label="Future Heat Score",
+            linewidth=1
+        )
+
+        axes[1].plot(
+            df["timestamp"],
+            df["future_open_score"],
+            linestyle="--",
+            label="Combined OPEN Score",
             linewidth=1.5
         )
 
-        axes[1].step(
-            df["timestamp"],
-            df["predicted_open"],
-            where="post",
-            label="Predicted",
-            linewidth=1.2
+        axes[1].set_ylim(
+            0,
+            1
         )
 
-        axes[1].set_yticks([0, 1])
-
-        axes[1].set_yticklabels([
-            "CLOSED",
-            "OPEN"
-        ])
-
         axes[1].set_ylabel(
-            "Umbrella"
+            "Soft Label"
+        )
+
+        axes[1].set_title(
+            "Rain and Heat Contributions"
         )
 
         axes[1].legend()
@@ -331,19 +472,24 @@ def plot_rainy_folds(
             alpha=0.3
         )
 
-        # Plot missclassificaiton
-        wrong = (
-            df["actual_rain"]
-            != df["predicted_open"]
-        )
-
-        error = wrong.astype(int)
+        # ====================================================
+        # 3. ACTUAL VS PREDICTED ACTION
+        # ====================================================
 
         axes[2].step(
             df["timestamp"],
-            error,
+            df["actual_open"],
             where="post",
-            linewidth=2
+            label="Actual OPEN",
+            linewidth=1.5
+        )
+
+        axes[2].step(
+            df["timestamp"],
+            df["predicted_open"],
+            where="post",
+            label="Predicted OPEN",
+            linewidth=1.2
         )
 
         axes[2].set_yticks(
@@ -351,19 +497,53 @@ def plot_rainy_folds(
         )
 
         axes[2].set_yticklabels([
+            "CLOSED",
+            "OPEN"
+        ])
+
+        axes[2].set_ylabel(
+            "Umbrella"
+        )
+
+        axes[2].set_title(
+            "Actual vs Predicted Action"
+        )
+
+        axes[2].legend()
+
+        axes[2].grid(
+            alpha=0.3
+        )
+
+        # ====================================================
+        # 4. ERROR
+        # ====================================================
+
+        axes[3].step(
+            df["timestamp"],
+            error,
+            where="post",
+            linewidth=1.5
+        )
+
+        axes[3].set_yticks(
+            [0, 1]
+        )
+
+        axes[3].set_yticklabels([
             "Correct",
             "Wrong"
         ])
 
-        axes[2].set_ylabel(
+        axes[3].set_ylabel(
             "Error"
         )
 
-        axes[2].set_xlabel(
+        axes[3].set_xlabel(
             "Time"
         )
 
-        axes[2].grid(
+        axes[3].grid(
             alpha=0.3
         )
 
@@ -415,14 +595,21 @@ def pooled_metrics(results):
     )
 
     return {
-        "TP": TP,
-        "TN": TN,
-        "FP": FP,
-        "FN": FN,
+    "fold": data.get("fold"),
 
-        "Accuracy": accuracy,
-        "Closed Accuracy": closed_accuracy,
-        "Rain Recall": recall,
-        "Open Precision": precision,
-        "F1": f1,
-    }
+    "rain_minutes": int(rain_minutes),
+    "heat_minutes": int(heat_minutes),
+    "open_minutes": int(open_minutes),
+
+    "TP": TP,
+    "TN": TN,
+    "FP": FP,
+    "FN": FN,
+
+    "accuracy": accuracy,
+    "closed_accuracy": closed_accuracy,
+    "open_accuracy": open_accuracy,
+    "open_recall": recall,
+    "open_precision": precision,
+    "f1": f1,
+}

@@ -284,7 +284,7 @@ def learn_state_scores(
         .notna()
         .all(axis=1)
         &
-        train_df["future_rain_score"]
+        train_df["future_open_score"]
         .notna()
     )
 
@@ -305,7 +305,7 @@ def learn_state_scores(
     state_scores = (
         data
         .groupby("HMM_State")
-        ["future_rain_score"]
+        ["future_open_score"]
         .mean()
     )
 
@@ -342,7 +342,7 @@ def evaluate_day(
         .notna()
         .all(axis=1)
         &
-        eval_df["future_rain_score"]
+        eval_df["future_open_score"]
         .notna()
     )
 
@@ -356,19 +356,21 @@ def evaluate_day(
 
     X_scaled = scaler.transform(X)
 
-    # State probabilities
+    # ========================================================
+    # STATE PROBABILITIES
+    # ========================================================
+
     state_probs = hmm.predict_proba(
         X_scaled
     )
 
-    # Most likely state
     result["HMM_State"] = hmm.predict(
         X_scaled
     )
 
-    # ----------------------------------------
-    # Stochastic P(OPEN)
-    # ----------------------------------------
+    # ========================================================
+    # STOCHASTIC P(OPEN)
+    # ========================================================
 
     result["P_OPEN"] = (
         state_probs @ state_scores
@@ -378,19 +380,37 @@ def evaluate_day(
         1 - result["P_OPEN"]
     )
 
-    # Actual soft target
+    # ========================================================
+    # ACTUAL LABEL
+    # ========================================================
+
     result["Actual_Soft_Label"] = (
+        result["future_open_score"]
+    )
+
+    # Keep individual components for analysis
+    result["Actual_Rain_Score"] = (
         result["future_rain_score"]
     )
 
-    # Hard action only for reference
+    result["Actual_Heat_Score"] = (
+        result["future_heat_score"]
+    )
+
+    # ========================================================
+    # HARD ACTION
+    # ========================================================
+
     result["Predicted_Action"] = np.where(
         result["P_OPEN"] >= 0.5,
         "OPEN",
         "CLOSE",
     )
 
-    # Store state probabilities
+    # ========================================================
+    # STORE STATE PROBABILITIES
+    # ========================================================
+
     for state in range(
         hmm.n_components
     ):

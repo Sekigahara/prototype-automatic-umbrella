@@ -73,6 +73,7 @@ def save_evaluation_json(
     output_dir="evaluation_logs",
 ):
     output_dir = Path(output_dir)
+
     output_dir.mkdir(
         parents=True,
         exist_ok=True
@@ -83,102 +84,213 @@ def save_evaluation_json(
     for _, row in result.iterrows():
 
         record = {
-            "timestamp": str(row["Date/Time"]),
 
-            # Original weather parameters
+            "timestamp": sanitize_value(
+                row["Date/Time"]
+            ),
+
+            # ====================================================
+            # ORIGINAL WEATHER PARAMETERS
+            # ====================================================
+
             "features": {
-                "temperature_c": row["Temperature (°C)"],
-                "precipitation_mm": row[
-                    "1-minute Precipitation (mm)"
-                ],
-                "precipitation_presence": row[
-                    "Precipitation Presence (Presence/Absence)"
-                ],
-                "wind_direction_deg": row[
-                    "Wind Direction (deg)"
-                ],
-                "wind_speed_ms": row[
-                    "Wind Speed (m/s)"
-                ],
-                "pressure_hpa": row[
-                    "Local Pressure (hPa)"
-                ],
-                "humidity_percent": row[
-                    "Humidity (%)"
-                ],
+
+                "temperature_c": sanitize_value(
+                    row["Temperature (°C)"]
+                ),
+
+                "precipitation_mm": sanitize_value(
+                    row["1-minute Precipitation (mm)"]
+                ),
+
+                "precipitation_presence": sanitize_value(
+                    row[
+                        "Precipitation Presence (Presence/Absence)"
+                    ]
+                ),
+
+                "wind_direction_deg": sanitize_value(
+                    row["Wind Direction (deg)"]
+                ),
+
+                "wind_speed_ms": sanitize_value(
+                    row["Wind Speed (m/s)"]
+                ),
+
+                "pressure_hpa": sanitize_value(
+                    row["Local Pressure (hPa)"]
+                ),
+
+                "humidity_percent": sanitize_value(
+                    row["Humidity (%)"]
+                ),
             },
 
-            # HMM engineered features
+            # ====================================================
+            # HMM ENGINEERED FEATURES
+            # ====================================================
+
             "hmm_features": {
-                "wind_dir_sin": row.get(
-                    "wind_dir_sin",
-                    None
+
+                "wind_dir_sin": sanitize_value(
+                    row.get("wind_dir_sin", None)
                 ),
-                "wind_dir_cos": row.get(
-                    "wind_dir_cos",
-                    None
+
+                "wind_dir_cos": sanitize_value(
+                    row.get("wind_dir_cos", None)
                 ),
-                "humidity_change_5min": row.get(
-                    "humidity_change_5min",
-                    None
+
+                "humidity_change_5min": sanitize_value(
+                    row.get(
+                        "humidity_change_5min",
+                        None
+                    )
                 ),
-                "pressure_change_5min": row.get(
-                    "pressure_change_5min",
-                    None
+
+                "pressure_change_5min": sanitize_value(
+                    row.get(
+                        "pressure_change_5min",
+                        None
+                    )
                 ),
-                "wind_change_5min": row.get(
-                    "wind_change_5min",
-                    None
+
+                "wind_change_5min": sanitize_value(
+                    row.get(
+                        "wind_change_5min",
+                        None
+                    )
                 ),
-                "rain_5min": row.get(
-                    "rain_5min",
-                    None
+
+                "rain_5min": sanitize_value(
+                    row.get(
+                        "rain_5min",
+                        None
+                    )
                 ),
             },
 
-            # Model output
-            "hmm_state": int(
-                row["HMM_State"]
-            ),
+            # ====================================================
+            # HMM MODEL OUTPUT
+            # ====================================================
 
-            "predicted_probability": float(
-                row["P_OPEN"]
-            ),
+            "model": {
 
-            "predicted_open": int(
-                row["P_OPEN"] >= 0.5
-            ),
+                "hmm_state": sanitize_value(
+                    row["HMM_State"]
+                ),
 
-            # Ground truth
-            "actual_future_rain_score": float(
-                row["Actual_Soft_Label"]
-            ),
+                "predicted_p_open": sanitize_value(
+                    row["P_OPEN"]
+                ),
 
-            "actual_rain": int(
-                row["Actual_Soft_Label"] >= 0.5
-            ),
+                "predicted_p_close": sanitize_value(
+                    row.get(
+                        "P_CLOSE",
+                        1 - row["P_OPEN"]
+                    )
+                ),
+
+                "predicted_action": row.get(
+                    "Predicted_Action",
+                    "OPEN"
+                    if row["P_OPEN"] >= 0.5
+                    else "CLOSE"
+                ),
+            },
+
+            # ====================================================
+            # GROUND TRUTH COMPONENTS
+            # ====================================================
+
+            "ground_truth": {
+
+                # Rain contribution
+                "future_rain_score": sanitize_value(
+                    row.get(
+                        "future_rain_score",
+                        row.get(
+                            "Actual_Rain_Score",
+                            None
+                        )
+                    )
+                ),
+
+                # Heat contribution
+                "future_heat_score": sanitize_value(
+                    row.get(
+                        "future_heat_score",
+                        row.get(
+                            "Actual_Heat_Score",
+                            None
+                        )
+                    )
+                ),
+
+                # Combined rain + heat OPEN target
+                "future_open_score": sanitize_value(
+                    row["Actual_Soft_Label"]
+                ),
+
+                # Binary OPEN/CLOSE reference
+                "actual_action": (
+                    "OPEN"
+                    if row["Actual_Soft_Label"] >= 0.5
+                    else "CLOSE"
+                ),
+
+                "actual_open": int(
+                    row["Actual_Soft_Label"] >= 0.5
+                ),
+            },
+
+            # ====================================================
+            # OPTIONAL HEAT DEBUG INFORMATION
+            # ====================================================
+
+            "heat_information": {
+
+                "effective_heat": sanitize_value(
+                    row.get(
+                        "effective_heat",
+                        None
+                    )
+                ),
+
+                "heat_score": sanitize_value(
+                    row.get(
+                        "heat_score",
+                        None
+                    )
+                ),
+            },
         }
 
         records.append(record)
 
-    # 1. If 'metrics' is a 1-row DataFrame or Series, extract the row
-    row = metrics.iloc[0] if isinstance(metrics, pd.DataFrame) else metrics
+    # ============================================================
+    # CLEAN METRICS
+    # ============================================================
 
-    # 2. Convert to dictionary while safely mapping types
-    clean_metrics = pandas_to_metrics_dict(metrics)
+    clean_metrics = pandas_to_metrics_dict(
+        metrics
+    )
 
-    #print(metrics, type(metrics))
+    # ============================================================
+    # FINAL OUTPUT
+    # ============================================================
+
     output = {
-        "fold": fold,
+
+        "fold": sanitize_value(fold),
 
         "training": {
-            "start": str(train_start),
-            "end": str(train_end),
+            "start": sanitize_value(train_start),
+            "end": sanitize_value(train_end),
         },
 
         "evaluation": {
-            "start": str(eval_start),
-            "end": str(eval_end),
+            "start": sanitize_value(eval_start),
+            "end": sanitize_value(eval_end),
         },
 
         "metrics": clean_metrics,

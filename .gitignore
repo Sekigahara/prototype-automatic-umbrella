@@ -1,2 +1,5 @@
 weather_venv/*
 dataset/*
+# Python bytecode caches (modules/*/__pycache__, legacy/modules/__pycache__)
+__pycache__/
+*.pyc

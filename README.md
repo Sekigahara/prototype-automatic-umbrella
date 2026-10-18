@@ -1,316 +1,167 @@
-# Weather Analytics & Automated Umbrella
+# Automatic Umbrella
 
-This project analyzes weather data and trains a Hidden Markov Model (HMM)
-to estimate whether an automated umbrella should be **OPEN** or **CLOSED**.
+Decides whether an automatic umbrella should be **OPEN** or **CLOSED**, with a probability, from simple weather sensors.
+It opens for **rain** and for **heat stress** (UTCI, via `pythermalcomfort`).
 
-The model uses minute-level weather observations and evaluates predictions
-using rolling/walk-forward time blocks.
+The pipeline turns 1-minute weather-station data into 20-second data, labels it, and trains a Gaussian HMM that is evaluated the way it would run on the device.
 
-## 1. Requirements
+```text
+dataset/  (KMA AWS, 1 min)
+   │  simulation.ipynb   1 min → 20 s (PCHIP)
+   ▼
+simulated_dataset/  (20 s, one CSV per month)
+   │  labeling.ipynb     UTCI + rain → p_open, label OPEN/CLOSED
+   ▼
+labeled_dataset/  (20 s + labels)
+   │  training.ipynb     window features → split → walk-forward HMM → evaluation
+   ▼
+models/umbrella_hmm.joblib
+```
 
-- Python 3.9
-- Conda
-- Jupyter Notebook
-
-The project uses a Conda environment named `weather_env`.
-
-## 2. Create the Conda Environment
+## Setup
 
 ```bash
 conda create -n weather_env python=3.9
 conda activate weather_env
 pip install -r requirements.txt
-```
-
-If additional packages are required by the project:
-
-```bash
-pip install <package-name>
-```
-
-## 3. Start Jupyter
-
-```bash
-conda activate weather_env
-jupyter notebook
-```
-
-or:
-
-```bash
-jupyter lab
-```
-
-If the kernel is not available:
-
-```bash
-pip install ipykernel
 python -m ipykernel install --user --name weather_env --display-name "Python (weather_env)"
 ```
 
-Then select **Python (weather_env)** as the notebook kernel.
+Run the notebooks in order with the **weather_env** kernel. Restart the kernel after changing anything in `modules/`.
 
-## 4. Project Workflow
+## Data
 
-The current workflow consists mainly of:
+`dataset/` holds the raw minute data from **KMA automatic weather station 939** (cp949 CSVs, Korean headers; git-ignored).
+It covers 2024-01-01 → 2026-08-09, **without 2025**, and includes about 70 gaps; the longest is a 13.6-hour outage on 2024-07-22.
+Timestamps label the **end** of each minute.
 
-```text
-analytics.ipynb
-plot.ipynb
-```
+| Column | Meaning | Used for |
+|---|---|---|
+| `temperature`, `humidity`, `wind_speed` | air temperature (°C), relative humidity (%), wind speed (m/s) | UTCI and model features |
+| `rain_flag` | rain detector, 0 = dry / 10 = wet | rain labels and features |
+| `rain` | rain gauge, mm per minute (0.5 mm steps) | rain labels only |
+| `wind_dir` | wind direction (°) | available, not used yet |
+| `pressure`, `sea_pressure` | barometric pressure | not used (no sensor on the device) |
+| `solar`, `sunshine` | placeholders only (−9.97, 64539) | dropped |
 
-### `analytics.ipynb`
+The model only uses sensors the device has: **temperature, humidity, wind, rain detector, clock**.
 
-Main notebook for:
+## 1. Simulation: `simulation.ipynb`
 
-1. Loading weather data
-2. Combining monthly datasets
-3. Preparing weather features
-4. Creating temporal features
-5. Training the HMM
-6. Performing rolling/walk-forward evaluation
-7. Generating predictions
-8. Calculating metrics
-9. Saving evaluation results
+Upsamples the 1-minute data to 20 s with `modules/simulation/pchip.py`; `modules/dataset/dataset.py` adapts the raw files.
 
-The model operates on **1-minute weather observations**.
+- **Modes:** each variable is treated according to how it was measured:
 
-Current weather features:
+  | Mode | Variables | Rule |
+  |---|---|---|
+  | `point` | temperature, pressure, humidity | PCHIP curve through every minute value |
+  | `mean` | wind speed, wind direction (as sin/cos) | 20 s values average back to the minute value |
+  | `total` | rain | minute amount split evenly over the minute |
 
-```python
-weather_cols = [
-    "Temperature (°C)",
-    "1-minute Precipitation (mm)",
-    "Precipitation Presence (Presence/Absence)",
-    "Wind Direction (deg)",
-    "Wind Speed (m/s)",
-    "Local Pressure (hPa)",
-    "Humidity (%)"
-]
-```
+- **Gaps:** each variable is interpolated within its own unbroken runs and never across a gap.
+- **Missing values:** missing rain becomes 0; rows still missing other values are dropped.
+- **Rain detector:** `rain_flag` is held constant across each minute.
+- **Settings:** `START`, `END`, `STEP_SECONDS` (20).
+- **Output:** `simulated_dataset/<YYYY-MM>.csv`.
 
-### `plot.ipynb`
+The 20 s data is a deterministic interpolation, not measured 20 s truth.
 
-Used after training/evaluation to inspect the results.
+## 2. Labeling: `labeling.ipynb`
 
-It can be used to:
+Adds the target `label` to every 20 s row:
 
-- Plot actual vs predicted umbrella states
-- Plot HMM OPEN probabilities
-- Visualize prediction errors
-- Inspect individual evaluation folds
-- Compare rainy periods
-- Analyze OPEN/CLOSED prediction accuracy
+- **Heat:**
+  - `utci` comes from `pythermalcomfort.models.utci` (temperature, humidity, wind clipped to 0.5–17 m/s).
+  - Mean radiant temperature = air temperature (shade), because the station has no solar data.
+  - `p_heat` is a logistic curve on the 10-minute mean UTCI: 5 % at 26 °C, 50 % at 29 °C, 95 % at 32 °C.
+  - Heat only counts 07:00–19:00.
+- **Rain:** `p_rain` is 1 while the gauge or detector is wet, then fades as `exp(−minutes / 5)`.
+- **Combined:** `p_open = 1 − (1 − p_heat)(1 − p_rain)`; `open_percent` = `p_open` × 100.
+- **Label:** `OPEN` at `p_open ≥ 0.5`, back to `CLOSED` only below 0.3 (hysteresis, no flapping).
+  - `reason` = `heat`, `rain` or `heat+rain`.
+- **Output:** `labeled_dataset/<YYYY-MM>.csv` (simulated columns + `utci`, `stress_category`, `p_heat`, `p_rain`, `p_open`, `open_percent`, `label`, `reason`).
 
-The evaluation is performed at **1-minute resolution**.
+## 3. Training: `training.ipynb`
 
-## 5. Evaluation Strategy
+1. **Load:** `load_simulated()` reads `simulated_dataset/` and adds `segment`, which numbers unbroken stretches. Sequences never cross a gap.
+2. **Split:** `hourly_split()`: every day, `N_HOURS` (3) random hours from 06:00 onward become evaluation.
+   - One hour is drawn from each part of the day (06–11, 12–17, 18–23).
+   - A 30-minute buffer around each evaluation hour belongs to neither set, which prevents leakage.
+3. **Labels:** joins `label`, `reason` and `utci` from `labeled_dataset/`.
+4. **Window features:** `add_window_features()`, still at 20 s.
+   - Each row summarises the **past** few minutes; windows never cross gaps.
+   - Computed on the whole stream before splitting.
 
-The project uses chronological walk-forward evaluation rather than random
-train/test splitting.
+   | Feature | From |
+   |---|---|
+   | `utci_mean_10m`, `utci_max_10m` | UTCI (temperature, humidity, wind) |
+   | `wet_share_5m`, `wet_share_10m`, `rain_recency` | rain detector |
+   | `humidity`, `humidity_chg_15m` | humidity |
+   | `wind_mean_5m`, `wind_max_5m` | wind speed |
+   | `hour_sin`, `hour_cos` | clock |
 
-The general procedure is:
+5. **Walk-forward evaluation (deployment simulation):** `walk_forward()`.
+   - Retrains every 7 days on the training rows of the last `WINDOW_DAYS` (60) days.
+   - The first fit keeps the best of several random starts; later fits warm-start from the previous week.
+   - If a fit fails, it refits from scratch, and otherwise keeps the previous model.
+   - The HMM (`RidgeGaussianHMM`, full covariance with a ridge so covariances stay valid) reads the sensor stream **forward only**.
+   - Each hidden state gets an OPEN rate from the training labels, and `P(OPEN in HORIZON_MINUTES)` = Σ P(state) × rate.
+   - Decision: per-fold F1-tuned threshold, then hysteresis (`CLOSE_MARGIN` 0.2) and a `MIN_HOLD_MINUTES` (3) hold time.
+6. **Evaluation:** compared with **persistence**, i.e. "the label stays as it is now".
+   - Row metrics: F1, precision, recall, ROC-AUC, Brier.
+   - Recall per reason.
+   - **Open/close behaviour:** periods opened for, opening/closing delay, closed too early, false openings and switches per 24 h.
+7. **Final model:** `train_final()` fits on the latest window and saves `models/umbrella_hmm.joblib` (HMM, scaler, state OPEN rates, threshold, close margin, hold time).
 
-```text
-Initial Training
-      |
-      v
-Train HMM
-      |
-      v
-Evaluate next day
-      |
-      v
-Add new data to training
-      |
-      v
-Train/update HMM
-      |
-      v
-Evaluate next day
-      |
-      v
-Repeat
-```
+Main settings (`training.ipynb`, section 4):
 
-This prevents future weather observations from leaking into the past.
+| Setting | Default | Meaning |
+|---|---|---|
+| `N_STATES` | 10 | hidden states (5 trains faster, weaker on heat) |
+| `HORIZON_MINUTES` | 5 | predict the label this far ahead |
+| `RETRAIN_DAYS` / `WINDOW_DAYS` | 7 / 60 | retrain weekly on the latest 60 days of data |
+| `USE_WINDOWS` | True | window features (False = current readings only) |
+| `TUNE_THRESHOLD` | True | F1-optimal threshold per retrain |
+| `CLOSE_MARGIN`, `MIN_HOLD_MINUTES` | 0.2, 3 | anti-flapping rules for the decision |
 
-Current configuration:
+A full 2024–2026 run with 10 states takes a few hours.
 
-```python
-N_STATES = 5
-INITIAL_TRAIN_DAYS = 5
-TRAIN_INTERVAL_DAYS = 5
-HORIZON = 5
-N_ITER = 50
-```
+## Deployment
 
-Where:
-
-- `N_STATES` = number of hidden HMM states
-- `INITIAL_TRAIN_DAYS` = initial amount of training data
-- `TRAIN_INTERVAL_DAYS` = amount of additional historical data before the next evaluation
-- `HORIZON` = future prediction horizon in minutes
-- `N_ITER` = maximum HMM training iterations
-
-## 6. Running the Project
-
-### Step 1 — Training and Evaluation
-
-Open:
+On the device, every 20 s:
 
 ```text
-analytics.ipynb
+sensor reading → UTCI (pythermalcomfort) → window features (last 15 min buffer)
+              → HMM forward step → p_open → threshold + hysteresis + hold → OPEN / CLOSED
 ```
 
-Run the notebook from the beginning.
+`predict_open(bundle, stream)` in `modules/model/hmm.py` gives `p_open` for a stream of rows with the model's features.
 
-The workflow is:
+## Current status
+
+Walk-forward on March–September 2024 (10 states, window features, device sensors only):
+- F1 ≈ 0.69; rain recall ≈ 95 %, heat recall ≈ 53 %.
+- ≈ 3.6 switches/day; rarely closes too early; closes ≈ 10 min late after rain.
+- **Persistence still scores higher (F1 ≈ 0.97).**
+
+The labels are computed from current sensors, so a rule on live sensors is a strong baseline.
+Next step under consideration: a small classifier on top of the HMM state probabilities, mainly to improve heat.
+
+Limitations:
+- The 20 s data is interpolated.
+- UTCI assumes shade.
+- The labels are rule-based, not observed.
+- There is no 2025 data.
+
+## Repository layout
 
 ```text
-Weather Data
-     |
-     v
-Feature Preparation
-     |
-     v
-Temporal Features
-     |
-     v
-HMM Training
-     |
-     v
-Walk-forward Evaluation
-     |
-     v
-Metrics + Predictions
-     |
-     v
-Saved Results
+simulation.ipynb, labeling.ipynb, training.ipynb   pipeline notebooks (run in this order)
+modules/simulation/pchip.py       1 min → 20 s upsampling (point / mean / total)
+modules/dataset/dataset.py        load_aws, simulate, load_simulated
+modules/dataset/split.py          hourly_split, sequence_lengths
+modules/dataset/windowing.py      add_window_features, WINDOW_FEATURES
+modules/model/hmm.py              RidgeGaussianHMM, walk_forward, evaluate, evaluate_actions, train_final, predict_open
+dataset/, simulated_dataset/, labeled_dataset/, models/   data and outputs
+legacy/, requirements_legacy.txt  previous 1-minute HMM prototype
 ```
-
-### Step 2 — Visual Evaluation
-
-After `analytics.ipynb` finishes, open:
-
-```text
-plot.ipynb
-```
-
-Load the generated evaluation results and visualize the folds.
-
-The plots should allow inspection of:
-
-- Actual umbrella state
-- Predicted umbrella state
-- HMM probability of OPEN
-- Prediction threshold
-- Correct predictions
-- Incorrect predictions
-- Rain events
-
-## 7. Important Notes
-
-### Keep the data chronological
-
-Do not randomly shuffle the weather data.
-
-Weather is a time-series problem, so temporal ordering must be preserved.
-
-### Keep minute-level resolution
-
-The original weather observations are maintained at:
-
-```text
-1 observation = 1 minute
-```
-
-The model and evaluation should preserve this resolution.
-
-### Evaluation data must remain unseen
-
-The future evaluation day must not be included in HMM training before
-prediction.
-
-### Missing values
-
-Weather data may contain missing values (`NaN`).
-
-Before training, make sure the feature matrix does not contain:
-
-```text
-NaN
-inf
--inf
-```
-
-## 8. Recommended Project Structure
-
-```text
-weather-analytics/
-|
-├── analytics.ipynb
-├── plot.ipynb
-├── README.md
-|
-├── data/
-|   ├── January.csv
-|   ├── February.csv
-|   ├── March.csv
-|   └── ...
-|
-├── results/
-|   ├── metrics/
-|   ├── predictions/
-|   └── logs/
-|
-└── modules/
-    └── model.py
-```
-
-## 9. Quick Start
-
-For a new machine:
-
-```bash
-conda create -n weather_env python=3.9
-conda activate weather_env
-
-pip install numpy pandas matplotlib scikit-learn hmmlearn tqdm jupyter ipykernel
-
-python -m ipykernel install --user     --name weather_env     --display-name "Python (weather_env)"
-
-jupyter notebook
-```
-
-Then:
-
-```text
-1. Open analytics.ipynb
-2. Select Python (weather_env)
-3. Run the training/evaluation pipeline
-4. Open plot.ipynb
-5. Analyze the evaluation folds
-```
-
-## 10. Current Model Goal
-
-The final objective is to determine whether the automated umbrella should be:
-
-```text
-OPEN
-```
-
-or:
-
-```text
-CLOSED
-```
-
-using historical and current weather patterns rather than relying only
-on a deterministic rainfall threshold.
-
-The HMM is intended to capture the **temporal/stochastic behavior of weather**
-and provide a probability of the umbrella being in the OPEN state.
-
-Currently, the prototype only considers water drop/raining condition, future development, we will cover the temperature effect that triggers the umbrella to be open and further performance improvement.

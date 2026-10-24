@@ -10,9 +10,11 @@ through the trained model, and prepare that data. The device needs only this fol
 | `extract_evaluation.py` | extracts held-out weather clips (never used for training) for the replay | no |
 | `modules/fake_shelly.py` | a simulated Shelly + motor, so `test_shelly.py` runs without hardware | no |
 
-**All commands below are run from this folder** (`cd deployment`), with the environment from
-[Setup](#setup-linux-python-39) activated. Every option has a default except
-`test_shelly.py --host`; `python <script> --help` lists them all.
+**First time?** Set up the Jetson and the Python environment with [SETUP.md](SETUP.md)
+(USB/PuTTY, SSH, Wi-Fi, venv or conda).
+
+**All commands below are run from this folder** (`cd deployment`), with that environment activated.
+Every option has a default except `test_shelly.py --host`; `python <script> --help` lists them all.
 
 ## Quick start
 
@@ -31,143 +33,6 @@ python test_shelly.py --host 192.168.1.50
 ```
 
 **To stop anything: press Ctrl+C.** It is always safe; see [Stopping safely](#stopping-safely).
-
-## Setup (Linux, Python 3.9)
-
-`requirements.txt` pins the direct dependencies; all of them install from binary wheels on Linux x86_64.
-Python 3.9 is required. Use **either** a venv (option A) **or** conda (option B), not both.
-
-### Option A: venv
-
-Ubuntu 22.04 ships 3.10, so install 3.9 from the deadsnakes PPA:
-
-```bash
-sudo apt update
-sudo apt install -y software-properties-common
-sudo add-apt-repository -y ppa:deadsnakes/ppa
-sudo apt install -y python3.9 python3.9-venv
-```
-
-Then, from the repository root:
-
-```bash
-python3.9 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r deployment/requirements.txt
-python -m ipykernel install --user --name weather_env --display-name "Python (weather_env)"
-```
-
-Activate it again in every new shell with `source .venv/bin/activate`.
-
-### Option B: Miniconda (own environment, any Python version)
-
-Conda installs Python 3.9 itself, so no system Python or PPA is needed. Everything goes into its own environment,
-here called **`umbrella`**; `base` is never touched. Use any name except `base`, and the same name in every step.
-The installer steps follow Anaconda's
-[Miniconda Linux install guide](https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install),
-for **aarch64** (ARM64, the Jetson Orin). On an x86_64 PC, replace `aarch64` with `x86_64` in steps 2–4.
-
-1. **Check the architecture** and that conda is not installed yet:
-   ```bash
-   uname -m             # aarch64 on the Jetson Orin
-   conda --version      # "command not found" -> install it (steps 2-4); a version -> skip to step 5
-   ```
-   Do not install a second copy over an existing one: if `~/miniconda3` already exists, the installer stops with
-   "File or directory already exists". Never force it with `-u` or `-f`; that can break the installation.
-2. **Download the aarch64 installer** into your home folder:
-   ```bash
-   cd ~
-   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-   ```
-3. **Verify it** (recommended): compare the hash with the one listed for `Miniconda3-latest-Linux-aarch64.sh`
-   at <https://repo.anaconda.com/miniconda/>. Only continue if they match.
-   ```bash
-   sha256sum ~/Miniconda3-latest-Linux-aarch64.sh
-   ```
-4. **Install:**
-   ```bash
-   bash ~/Miniconda3-latest-Linux-aarch64.sh
-   ```
-   Answer the prompts in this order:
-   - press **Return** to read the licence, then type **`yes`** to accept it;
-   - press **Return** to install to the default `/home/<user>/miniconda3`;
-   - type **`yes`** to initialize conda, so the `conda` command works in new shells.
-
-   It ends with "Thank you for installing Miniconda3!". Then reload the shell and check:
-   ```bash
-   source ~/.bashrc     # or close and reopen the terminal
-   conda list           # "# packages in environment at /home/<user>/miniconda3:" and a package list
-   ```
-   If `conda` is still not found: run `~/miniconda3/bin/conda init`, then `source ~/.bashrc` again.
-5. **Keep `base` out of the way.** After installing, every new shell starts in `base` (the prompt shows `(base)`),
-   so a stray `pip install` would land there. Turn that off; `conda` keeps working, and `conda activate` still
-   enters `base` when you really want it:
-   ```bash
-   conda config --set auto_activate_base false
-   conda config --describe auto_activate_base    # shows: auto_activate_base: false
-   source ~/.bashrc                               # the prompt no longer starts with (base)
-   ```
-6. **Create the environment with Python 3.9** (change `python=3.9` here for another version).
-   It uses the conda-forge channel only (`--override-channels`), which has Python 3.9 builds for aarch64:
-   ```bash
-   conda create -n umbrella -c conda-forge --override-channels python=3.9 pip -y
-   ```
-7. **Isolate it from user-level packages.** Packages in `~/.local` (from `pip install --user`) would otherwise
-   leak into the environment and mix versions:
-   ```bash
-   conda env config vars set -n umbrella PYTHONNOUSERSITE=1
-   ```
-8. **Activate it and check you are really inside it** before installing anything:
-   ```bash
-   conda activate umbrella
-   which python         # must be ~/miniconda3/envs/umbrella/bin/python, not ~/miniconda3/bin/python (base)
-   python --version     # Python 3.9.x
-   python -c "import platform; print(platform.machine())"   # aarch64
-   ```
-9. **Install the requirements with the environment's own pip**, from the repository root.
-   `python -m pip` (not plain `pip`) guarantees it installs into `umbrella`:
-   ```bash
-   python -m pip install --upgrade pip
-   python -m pip install -r deployment/requirements.txt
-   python -m pip check                        # "No broken requirements found."
-   ```
-10. **Optional, for the notebooks:** register it as a Jupyter kernel.
-   ```bash
-   python -m ipykernel install --user --name umbrella --display-name "Python 3.9 (umbrella)"
-   ```
-
-Run `conda activate umbrella` in every new shell before using the scripts.
-
-Rules that keep it clean:
-- Install packages only with `python -m pip` inside the activated environment. Do not also `conda install` the
-  same packages, or conda and pip will each manage their own copy.
-- On the Jetson (aarch64), if `pip` finds no prebuilt wheel for a package and tries to compile it, install that one
-  package from conda-forge first and rerun step 9:
-  `conda install -n umbrella -c conda-forge --override-channels <package>=<version from requirements.txt>`.
-- Keep `-c conda-forge --override-channels` on every `conda create` / `conda install`, as above, so the
-  environment only uses conda-forge packages.
-- Start over at any time, without affecting `base` or other environments:
-  ```bash
-  conda deactivate
-  conda env remove -n umbrella
-  ```
-- Check which environments exist and which one is active (marked `*`): `conda env list`.
-
-Miniconda on aarch64, from Anaconda's guide:
-- The `linux-aarch64` builds target server-class ARM CPUs (Neoverse N1/N2) and may not run on some boards,
-  Raspberry Pi in particular. If `conda` or `python` stops with "Illegal instruction", Miniconda does not support
-  that CPU: use option A (venv) instead.
-- Behind a proxy or firewall, `https://repo.anaconda.com` and `https://anaconda.org` must be reachable for the
-  installer and for conda; `https://conda.anaconda.org` is needed for the conda-forge packages in step 6.
-- A broken Miniconda can be repaired without losing environments: rename `~/miniconda3` to `~/miniconda_old`,
-  run the installer again into `~/miniconda3`, copy the old contents back with
-  `rsync -a ~/miniconda_old/ ~/miniconda3/`, check with `conda info --envs`, then delete `~/miniconda_old`.
-
-`dataset/` (raw KMA files) is git-ignored, so copy it over separately if you need to re-run `simulation.ipynb`.
-`simulated_dataset/`, `labeled_dataset/` and `models/umbrella_hmm.joblib` come with the repository.
-
----
 
 ## Workflow 1: try the motor control without hardware
 

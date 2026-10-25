@@ -8,10 +8,11 @@ the scripts in this folder. How to use the scripts afterwards: [README.md](READM
 | [1](#1-first-connection-usb-cable--putty) | USB cable + PuTTY (serial console) | first login, without monitor, keyboard or network |
 | [2](#2-ssh-over-the-usb-cable) | SSH over the same USB cable | a proper terminal: copy/paste, several sessions, file copy |
 | [3](#3-wi-fi-from-the-terminal) | Wi-Fi from the terminal | network access, and SSH without the cable |
-| [4](#4-clock-and-time-zone) | Clock and time zone | the model uses the local time of day |
-| [5](#5-get-the-code) | Get the code | this repository on the Jetson |
-| [6](#6-python-39-environment) | Python 3.9 environment: venv **or** conda | the packages the scripts need |
-| [7](#7-check-everything-works) | Check | run the scripts once |
+| [4](#4-remote-access-from-anywhere-tailscale) | Tailscale (background service) | SSH to the Jetson from any network |
+| [5](#5-clock-and-time-zone) | Clock and time zone | the model uses the local time of day |
+| [6](#6-get-the-code) | Get the code | this repository on the Jetson |
+| [7](#7-python-39-environment) | Python 3.9 environment: venv **or** conda | the packages the scripts need |
+| [8](#8-check-everything-works) | Check | run the scripts once |
 
 **You need:** the Jetson Orin Nano Developer Kit with JetPack already flashed (microSD or NVMe), its power supply,
 a **USB-C data cable** (charge-only cables do not work), and a Windows PC with [PuTTY](https://www.putty.org/).
@@ -104,7 +105,79 @@ From now on you can unplug the USB cable and connect over Wi-Fi: `ssh <user>@192
 **If `wlan0` is missing or Wi-Fi is "unavailable":** `rfkill list` shows whether it is blocked;
 `sudo rfkill unblock wifi` unblocks it.
 
-## 4. Clock and time zone
+## 4. Remote access from anywhere: Tailscale
+
+SSH over Wi-Fi (step 3) only works from the same network. [Tailscale](https://tailscale.com) gives the Jetson a
+private address you can reach from your PC anywhere (another Wi-Fi, mobile data), with no router or port settings.
+It runs as a **background service** (`tailscaled`): once logged in, it stays connected after you close SSH and
+reconnects by itself after every reboot.
+
+You need a free Tailscale account, and Tailscale installed and logged in on your **PC** too
+([download](https://tailscale.com/download)), with the same account.
+
+1. **Install** with Tailscale's install script (it picks the arm64 package for the Jetson and adds Tailscale's
+   package repository, so `sudo apt upgrade` keeps it up to date):
+   ```bash
+   curl -fsSL https://tailscale.com/install.sh | sh
+   ```
+2. **Make sure the background service runs now and starts at every boot:**
+   ```bash
+   sudo systemctl enable --now tailscaled
+   systemctl is-enabled tailscaled     # enabled
+   systemctl is-active tailscaled      # active
+   ```
+   Tailscale needs the `tun` kernel module. If the service fails to start, load it now and at every boot:
+   ```bash
+   sudo modprobe tun
+   echo tun | sudo tee /etc/modules-load.d/tun.conf
+   ```
+3. **Connect the Jetson to your Tailscale network**, choosing **one** of:
+   - **Login link** (simplest): run
+     ```bash
+     sudo tailscale up
+     ```
+     It prints a link such as `https://login.tailscale.com/a/...`. Open it on your PC or phone and log in; the command
+     then finishes by itself. The Jetson does not need a browser.
+   - **Auth key** (nothing to click, good for scripts): create a key in the Tailscale admin console
+     (**Settings → Keys → Generate auth key**), then
+     ```bash
+     sudo tailscale up --auth-key=tskey-auth-XXXXXXXX
+     ```
+     Treat the key like a password: do not commit it to git or leave it in shared notes.
+
+   This is needed only once: the login is saved and the service reconnects on its own after reboots or
+   network changes. `tailscale up` itself does not need to stay running; the connection lives in `tailscaled`.
+4. **Give it a recognisable name** and check it:
+   ```bash
+   sudo tailscale set --hostname=umbrella-jetson
+   tailscale status                    # the Jetson and your PC, both listed
+   tailscale ip -4                     # the Jetson's Tailscale address, e.g. 100.x.y.z
+   ```
+5. **Keep it connected for good:** in the admin console, **Machines → umbrella-jetson → ⋯ → Disable key expiry**.
+   Otherwise the login expires after some months and the Jetson silently drops off Tailscale.
+   (If that happened: `sudo tailscale up --force-reauth`.)
+6. **Connect from the PC** (with Tailscale running there), from any network:
+   ```powershell
+   ssh <user>@umbrella-jetson           # or ssh <user>@100.x.y.z
+   ```
+   In PuTTY: Host Name `umbrella-jetson` (or the `100.x.y.z` address), saved as `jetson-tailscale`.
+   This is normal SSH through Tailscale's private network, so the Jetson's own SSH server and password are used.
+
+Useful commands:
+
+| Command | What it does |
+|---|---|
+| `tailscale status` | devices on your Tailscale network and how they are connected |
+| `tailscale ip -4` | the Jetson's Tailscale address |
+| `sudo tailscale down` | disconnect for now (the service keeps running); `sudo tailscale up` reconnects |
+| `sudo tailscale logout` | disconnect and log out; the next `tailscale up` asks to log in again |
+| `systemctl status tailscaled` | whether the background service is running |
+| `journalctl -u tailscaled -n 50` | the service's last log lines, if something is wrong |
+
+Tailscale only carries the remote SSH session. The Jetson still talks to the Shelly over the local Wi-Fi, so
+the Shelly does not need Tailscale.
+
+## 5. Clock and time zone
 
 The model uses the **local time of day** (heat only counts in the daytime), and the training data is Korean time.
 Check that the clock is right and synchronised:
@@ -116,7 +189,7 @@ sudo timedatectl set-timezone Asia/Seoul      # if the time zone is different
 
 The clock synchronises over the internet (step 3).
 
-## 5. Get the code
+## 6. Get the code
 
 ```bash
 sudo apt update
@@ -135,7 +208,7 @@ scp -r prototype-automatic-umbrella <user>@192.168.1.42:~/
 (`modules/`) and `labeled_dataset/`, which come with the repository. `dataset/` (raw KMA files) is git-ignored; copy it
 over separately only if you want to re-run `simulation.ipynb`.
 
-## 6. Python 3.9 environment
+## 7. Python 3.9 environment
 
 The scripts need **Python 3.9**. JetPack 6 (Ubuntu 22.04) ships 3.10 and JetPack 5 (Ubuntu 20.04) ships 3.8,
 so 3.9 is installed next to it. Use **either** a venv (option A) **or** conda (option B), not both.
@@ -289,7 +362,7 @@ Miniconda on aarch64, from Anaconda's guide:
   run the installer again into `~/miniconda3`, copy the old contents back with
   `rsync -a ~/miniconda_old/ ~/miniconda3/`, check with `conda info --envs`, then delete `~/miniconda_old`.
 
-## 7. Check everything works
+## 8. Check everything works
 
 With the environment active:
 
@@ -310,6 +383,7 @@ Next: [README.md](README.md) for everything the scripts can do, and the safe way
 | `ssh` to `192.168.55.1` refused or times out | Over the serial console: `sudo systemctl enable --now ssh`; check the cable is still in |
 | Wi-Fi network not in `nmcli device wifi list` | `sudo nmcli device wifi rescan`, wait a few seconds and list again; check the network name and that the Jetson is in range |
 | Lost the Jetson's Wi-Fi address | Connect over USB again (step 2) and run `ip -4 addr show wlan0` |
-| `python3.9: command not found` | The environment is not active, or Python 3.9 is not installed (step 6) |
+| `python3.9: command not found` | The environment is not active, or Python 3.9 is not installed (step 7) |
 | `conda: command not found` | `~/miniconda3/bin/conda init`, then `source ~/.bashrc` |
+| `ssh umbrella-jetson` fails from outside | Tailscale running and logged in on the PC too; on the Jetson `tailscale status` lists it; key expiry (step 4.5) |
 | Scripts cannot reach the Shelly | Jetson and Shelly must be on the same network: `ping <shelly-ip>` from the Jetson |

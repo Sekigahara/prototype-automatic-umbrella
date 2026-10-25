@@ -11,7 +11,7 @@ through the trained model, and prepare that data. The device needs only this fol
 | `modules/fake_shelly.py` | a simulated Shelly + motor, so `test_shelly.py` runs without hardware | no |
 
 **First time?** Set up the Jetson and the Python environment with [SETUP.md](SETUP.md)
-(USB/PuTTY, SSH, Wi-Fi, venv or conda).
+(USB/PuTTY, SSH, Wi-Fi, Tailscale, venv or conda).
 
 **All commands below are run from this folder** (`cd deployment`), with that environment activated.
 Every option has a default except `test_shelly.py --host`; `python <script> --help` lists them all.
